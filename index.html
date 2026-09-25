@@ -1,28 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hello Mila</title>
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1e1b4b, #7c3aed);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-  h1 {
-    color: #fff;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    letter-spacing: -0.02em;
-    text-align: center;
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mila Haffar — Brand &amp; Experience Design</title>
+<meta name="description" content="Mila Haffar builds brands, products and services that hold together — every touchpoint part of one idea, every choice made for a specific person.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=chillax@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/main.js" defer></script>
 </head>
 <body>
-<h1>Hello Mila</h1>
+
+<nav class="nav pad">
+  <a class="nav-brand" href="index.html">MILA HAFFAR</a>
+  <a href="#work">Work</a>
+  <a href="#story">Story</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
+  <header class="hero pad">
+    <div class="hero-inner">
+      <div class="eyebrow">Brand &amp; experience design — Cornell, Cognitive Science</div>
+      <h1 class="hero-h">I build worlds where every detail belongs.</h1>
+      <p class="hero-lead">Brands, products and services that hold together — every touchpoint part of one idea, every choice made for a specific person.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#work">Selected work</a>
+        <a class="btn btn-secondary" href="#story">How I think</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="story" class="story pad rule-top">
+    <div class="story-inner">
+      <div class="section-label">About the work</div>
+
+      <p class="story-open">As a kid, I made kits.</p>
+      <p class="body">Collections of objects that belonged together — each with its own name, its own colors, its own identity. I did the same with people: invented personas, then worked out what would fit their lives. <em>(I didn't know yet that this was a job.)</em></p>
+      <p class="body gap">I still work this way. I sort experiences into worlds, decide what belongs in each one, and ask a single question over and over: <em>if I change this, what does it do to the person on the other end?</em></p>
+
+      <h3>Cohesion is the hard part</h3>
+      <p class="body gap">Most brands don't fail on ideas. They fail because the packaging says one thing, the website another and the experience a third. My job is to find the one idea that ties everything together — and make sure every piece earns its place.</p>
+
+      <h3>Cognitive science gives me the reasons</h3>
+      <p class="body gap">I study why people think and behave the way they do. That turns instinct into something I can explain: not "this feels right," but "this works because of how people read it."</p>
+
+      <h3 class="list-h">What I do</h3>
+      <ul class="num-list">
+        <li><span class="num">01</span><span>Brand strategy &amp; identity systems</span></li>
+        <li><span class="num">02</span><span>Service &amp; experience design</span></li>
+        <li><span class="num">03</span><span>Product concepts from behavioral insight</span></li>
+        <li><span class="num">04</span><span>Narrative &amp; presentation design</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="work" class="work pad rule-top">
+    <h2 class="work-h">Selected work</h2>
+
+    <article class="project">
+      <div class="project-text">
+        <div class="project-meta"><span class="muted">Internship:</span> Ministry of Finance</div>
+        <p class="project-desc">Narrative strategy &amp; presentation design. I took scattered policy material and gave it one structure and one voice — a client-facing deck that held its shape through six layers of review.</p>
+        <a class="see-more" href="mof.html">See more →</a>
+      </div>
+      <div class="strip-controls">
+        <button class="btn btn-secondary btn-icon" data-scroll="strip-mof" data-dir="-1" aria-label="Previous">←</button>
+        <button class="btn btn-secondary btn-icon" data-scroll="strip-mof" data-dir="1" aria-label="Next">→</button>
+      </div>
+      <div id="strip-mof" class="strip">
+        <div class="slot grayscale" data-src="images/v2-mof-1.jpg" data-alt="Deck cover"><div class="slot-empty"><span>Deck cover</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-mof-2.jpg" data-alt="Before / after slide"><div class="slot-empty"><span>Before / after slide</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-mof-3.jpg" data-alt="Story outline"><div class="slot-empty"><span>Story outline</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-mof-4.jpg" data-alt="Detail spread"><div class="slot-empty"><span>Detail spread</span></div></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-text">
+        <div class="project-meta"><span class="muted">Cornell Food Hackathon:</span> YOCA</div>
+        <p class="project-desc">Brand identity &amp; product concept. A high-protein yogurt with natural caffeine, built as one brand world: a pouch for one-handed mornings, a quiet serif wordmark, and four flavors pitched as four kinds of morning.</p>
+        <a class="see-more" href="yoca.html">See more →</a>
+      </div>
+      <div class="strip-controls">
+        <button class="btn btn-secondary btn-icon" data-scroll="strip-yoca" data-dir="-1" aria-label="Previous">←</button>
+        <button class="btn btn-secondary btn-icon" data-scroll="strip-yoca" data-dir="1" aria-label="Next">→</button>
+      </div>
+      <div id="strip-yoca" class="strip">
+        <div class="slot grayscale" data-src="images/v2-yoca-1.jpg" data-alt="Pouch lineup"><div class="slot-empty"><span>Pouch lineup</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-yoca-2.jpg" data-alt="Wordmark"><div class="slot-empty"><span>Wordmark</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-yoca-3.jpg" data-alt="Flavor range"><div class="slot-empty"><span>Flavor range</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-yoca-4.jpg" data-alt="Pitch slide"><div class="slot-empty"><span>Pitch slide</span></div></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-text">
+        <div class="project-meta"><span class="muted">Statler Hotel:</span> ReSET Studio</div>
+        <p class="project-desc">Service &amp; experience design. A guest experience for travelers who arrive depleted — check-in, room settings and a protected first hour designed as one sequence, each step shaping how the guest meets the next.</p>
+        <a class="see-more" href="reset.html">See more →</a>
+      </div>
+      <div class="strip-controls">
+        <button class="btn btn-secondary btn-icon" data-scroll="strip-reset" data-dir="-1" aria-label="Previous">←</button>
+        <button class="btn btn-secondary btn-icon" data-scroll="strip-reset" data-dir="1" aria-label="Next">→</button>
+      </div>
+      <div id="strip-reset" class="strip">
+        <div class="slot grayscale" data-src="images/v2-reset-1.jpg" data-alt="Room concept"><div class="slot-empty"><span>Room concept</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-reset-2.jpg" data-alt="Guest journey map"><div class="slot-empty"><span>Guest journey map</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-reset-3.jpg" data-alt="Service blueprint"><div class="slot-empty"><span>Service blueprint</span></div></div>
+        <div class="slot grayscale" data-src="images/v2-reset-4.jpg" data-alt="Check-in moment"><div class="slot-empty"><span>Check-in moment</span></div></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="contact" class="contact pad on-accent">
+    <h2>Like what you see? Let's build something together.</h2>
+    <div class="contact-links">
+      <!-- TODO: replace with your real email and LinkedIn URL -->
+      <a class="contact-email" href="mailto:hello@milahaffar.com">hello@milahaffar.com</a>
+      <a class="contact-secondary" href="https://linkedin.com">LinkedIn</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer pad">
+  <span>Mila Haffar</span>
+  <span>Ithaca, NY</span>
+</footer>
+
 </body>
 </html>
