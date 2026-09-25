@@ -120,7 +120,7 @@ img { display: block; max-width: 100%; }
   font-size: 12px; color: var(--color-neutral-600);
 }
 
-/* — accent banner (contact / next project) — */
+/* — accent banner (next project) — */
 .on-accent { background: var(--color-accent); color: var(--color-bg); }
 .on-accent a, .on-accent a:hover,
 a.on-accent, a.on-accent:hover { color: var(--color-bg); }
@@ -178,14 +178,6 @@ a.on-accent, a.on-accent:hover { color: var(--color-bg); }
 .strip::-webkit-scrollbar { display: none; }
 .strip > .slot { flex: 0 0 min(560px, 85vw); height: 360px; scroll-snap-align: start; }
 
-.contact { padding-top: 80px; padding-bottom: 80px; }
-.contact h2 { font-size: 56px; line-height: 1; letter-spacing: -0.03em; margin: 0 0 32px; max-width: 16ch; }
-.contact-links { display: flex; flex-wrap: wrap; gap: 32px; align-items: baseline; }
-.contact-email {
-  font-weight: 600; font-size: 22px; text-decoration: none;
-  border-bottom: 2px solid var(--color-bg);
-}
-.contact-secondary { font-size: 15px; }
 
 /* ═════════════════════════ Case studies ═════════════════════════ */
 .wrap { max-width: 1240px; }
