@@ -1,0 +1,213 @@
+/* Modernist design-system tokens (from modernist.css in the Claude Design file),
+   with the portfolio's Freight Display override, then the home page styles. */
+
+:root {
+  --color-bg: #f0e8dd;
+  --color-surface: #e6dccd;
+  --color-text: #4a3830;
+  --color-accent: #5e2a30;
+  --color-accent-2: #72899a;
+  --color-divider: color-mix(in srgb, #4a3830 35%, transparent);
+  --color-mist: #b8c9d0;
+  --color-slate: #72899a;
+  --color-taupe: #b6a68b;
+
+  --color-neutral-100: #f5efe7;
+  --color-neutral-200: #e6dccd;
+  --color-neutral-300: #d6c9b6;
+  --color-neutral-400: #b6a68b;
+  --color-neutral-500: #97876f;
+  --color-neutral-600: #7a6a58;
+  --color-neutral-700: #5e4d42;
+  --color-neutral-800: #4a3830;
+  --color-neutral-900: #33261f;
+
+  --color-accent-100: #f6ecea;
+  --color-accent-200: #ead3d2;
+  --color-accent-300: #d5aaab;
+  --color-accent-400: #a8676d;
+  --color-accent-500: #5e2a30;
+  --color-accent-600: #4f2328;
+  --color-accent-700: #431d22;
+  --color-accent-800: #33161a;
+  --color-accent-900: #231013;
+
+  --font-heading: 'freight-display-pro', 'Freight Display Pro', Georgia, serif;
+  --font-heading-weight: 800;
+  --font-body: 'freight-display-pro', 'Freight Display Pro', Georgia, serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-lid: cubic-bezier(0.65, 0, 0.25, 1);
+}
+
+/* — base — */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px; line-height: 1.55; font-weight: 400;
+}
+h1, h2, h3 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2);
+}
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-700); }
+img { display: block; max-width: 100%; }
+ul { list-style: none; margin: 0; padding: 0; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+.pad { padding-left: 40px; padding-right: 40px; }
+
+/* — nav — */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: var(--space-4);
+  padding-top: 16px; padding-bottom: 16px;
+  background: var(--color-bg);
+  border-bottom: 2px solid var(--color-divider);
+}
+.nav-brand {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px; letter-spacing: -0.02em; margin-right: auto;
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover { color: var(--color-accent); }
+
+/* — pills (hero focus areas, project kits) — */
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pills li {
+  border: 1px solid var(--color-neutral-400); border-radius: 999px;
+  padding: 3px 10px; font-size: 12px; color: var(--color-neutral-700);
+}
+
+/* — hero — */
+.hero { position: relative; overflow: hidden; padding-top: 32px; padding-bottom: 40px; }
+.hero-rule { height: 1px; background: var(--color-neutral-300); margin: 0 0 32px; }
+.hero-grid {
+  display: grid; gap: 40px; align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+}
+.hero-text { max-width: 620px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-accent-700); margin-bottom: 16px;
+}
+.hero-title {
+  font-size: clamp(24px, 2.8vw, 34px); line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600; margin: 0 0 16px; text-wrap: balance;
+}
+.hero-lead {
+  font-size: clamp(16px, 1.6vw, 19px); line-height: 1.55; letter-spacing: -0.01em;
+  margin: 0 0 24px; text-wrap: pretty;
+}
+.hero-pills { margin: 0 0 32px; }
+.hero-pills li { letter-spacing: 0.02em; }
+.hero-mark { max-width: 560px; width: 100%; justify-self: center; }
+
+/* Handwritten "Mila": a 1440×775 crop of the 1920×1080 drawing, scaled by js/mila.js */
+.mila { position: relative; width: 100%; aspect-ratio: 1440 / 775; overflow: hidden; }
+.mila-stage {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  transform-origin: 0 0; mix-blend-mode: multiply;
+}
+.mila-stage svg { position: absolute; inset: 0; }
+
+/* — selected work — */
+.work { padding-top: 56px; padding-bottom: 88px; border-top: 2px solid var(--color-divider); }
+.work-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  margin: 0 0 32px;
+}
+.work-head h2 { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; margin: 0; }
+.work-hint { font-size: 13px; color: var(--color-neutral-600); }
+.work-grid {
+  display: grid; gap: 56px 32px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+}
+
+.project {
+  display: flex; flex-direction: column; gap: 14px;
+  text-decoration: none; color: var(--color-text);
+}
+.project:hover { color: var(--color-text); }
+
+/* The cover is a lid hinged at its top edge. Hover or keyboard focus swings it
+   up and the project's kit (palette, lines, tags) rises in underneath. */
+.box { position: relative; width: 100%; aspect-ratio: 4 / 3; perspective: 1400px; }
+.kit {
+  position: absolute; inset: 0; padding: 22px;
+  display: flex; flex-direction: column; gap: 16px; justify-content: flex-end;
+  background: var(--color-surface); border: 2px solid var(--color-divider);
+}
+.kit-brief { gap: 12px; justify-content: space-between; overflow: hidden; }
+.kit > * {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease var(--d, 200ms), transform 0.6s var(--ease-out) var(--d, 200ms);
+}
+.lid {
+  position: absolute; inset: 0; transform-origin: 50% 0%; transform: rotateX(0deg);
+  transition: transform 0.9s var(--ease-lid);
+  box-shadow: 0 18px 30px -18px rgba(74, 56, 48, 0.4);
+  background: var(--color-bg);
+}
+.lid img { width: 100%; height: 100%; object-fit: cover; }
+.project:hover .lid, .project:focus-visible .lid { transform: rotateX(84deg); }
+.project:hover .kit > *, .project:focus-visible .kit > * { opacity: 1; transform: translateY(0); }
+
+.kit-top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-700);
+}
+.kit-copy { display: flex; flex-direction: column; gap: 10px; }
+.kit-name { font-size: 28px; line-height: 1; letter-spacing: -0.01em; }
+.kit-quote { font-size: clamp(18px, 1.7vw, 22px); line-height: 1.2; font-style: italic; text-wrap: pretty; }
+.kit-body { font-size: 14px; line-height: 1.5; color: var(--color-neutral-700); text-wrap: pretty; }
+.kit-cta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-top: 1px solid var(--color-neutral-300); padding-top: 12px; font-size: 14px;
+}
+.arrow { font-size: 16px; line-height: 1; letter-spacing: 0; text-transform: none; color: var(--color-text); }
+
+.swatches { display: flex; gap: 6px; }
+.swatches span { flex: 1; height: 44px; background: var(--c); }
+.lines { display: flex; flex-direction: column; gap: 2px; }
+.lines span { font-size: 24px; line-height: 1.15; font-style: italic; }
+
+.project-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  border-top: 2px solid var(--color-divider); padding-top: 12px;
+}
+.project-name { font-size: 22px; letter-spacing: -0.01em; }
+.project-meta { font-size: 13px; color: var(--color-neutral-600); text-align: right; }
+.project-desc { font-size: 15px; line-height: 1.55; margin: 0; color: var(--color-neutral-700); max-width: 52ch; }
+
+/* — contact — */
+.contact { background: var(--color-accent); color: var(--color-bg); padding-top: 80px; padding-bottom: 80px; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 32px; align-items: baseline; }
+.contact a, .contact a:hover { color: var(--color-bg); }
+.contact-email { font-weight: 600; font-size: 22px; text-decoration: none; border-bottom: 2px solid var(--color-bg); }
+.contact-social { font-size: 15px; }
+
+/* — footer — */
+.footer {
+  padding-top: 24px; padding-bottom: 24px;
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--color-neutral-600);
+}
+
+@media (max-width: 860px) {
+  .pad { padding-left: 20px; padding-right: 20px; }
+}
