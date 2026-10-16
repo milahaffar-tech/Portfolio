@@ -1,28 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hello Mila</title>
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1e1b4b, #7c3aed);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-  h1 {
-    color: #fff;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    letter-spacing: -0.02em;
-    text-align: center;
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mila Haffar — Creative Strategy &amp; Experience Design</title>
+<meta name="description" content="Mila Haffar is a Cornell student studying Cognitive Science and Design &amp; Environmental Analysis, working at the intersection of consumer psychology, strategy, and design.">
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/mila.js" defer></script>
 </head>
 <body>
-<h1>Hello Mila</h1>
+
+<nav class="nav pad">
+  <span class="nav-brand">MILA HAFFAR</span>
+  <a href="#work">Work</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+</nav>
+
+<main>
+  <header id="about" class="hero pad">
+    <div class="hero-rule"></div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow">Creative strategy &amp; experience design</div>
+        <h1 class="hero-title">Finding unity in individuality.</h1>
+        <p class="hero-lead">I'm Mila, a Cornell student studying Cognitive Science and Design &amp; Environmental Analysis, working at the intersection of consumer psychology, strategy, and design. I believe strong experiences are curated, not assembled, and I build them holistically, integrating empathetic research into every decision.</p>
+        <ul class="pills hero-pills">
+          <li>Hospitality</li>
+          <li>Consumer Psychology</li>
+          <li>Experience Design</li>
+          <li>Brand Strategy</li>
+          <li>AI Tools</li>
+        </ul>
+      </div>
+      <div class="hero-mark">
+        <div id="mila" class="mila" role="img" aria-label="Mila, handwritten"></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="work" class="work pad">
+    <div class="work-head">
+      <h2>Selected work</h2>
+      <span class="work-hint">Hover to open</span>
+    </div>
+
+    <div class="work-grid">
+      <a class="project" href="#work">
+        <div class="box">
+          <div class="kit kit-brief">
+            <div class="kit-top" style="--d: 200ms"><span>Creative strategy · Hospitality</span><span class="arrow">↗</span></div>
+            <div class="kit-copy" style="--d: 260ms">
+              <span class="kit-name">MOF</span>
+              <span class="kit-quote">Translating cultural insights into hospitality experiences.</span>
+              <span class="kit-body">Exploring how local identity, guest expectations, and brand storytelling can come together to shape a distinctive hospitality concept.</span>
+            </div>
+            <ul class="pills" style="--d: 320ms"><li>Cultural Research</li><li>Brand Strategy</li><li>Experience Concept</li></ul>
+            <div class="kit-cta" style="--d: 380ms"><span>Explore project</span><span class="arrow">↗</span></div>
+          </div>
+          <div class="lid"><img src="assets/mof-cover.jpg" alt="MOF — Hospitality Experience &amp; Brand Strategy, Türkiye" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="project-head">
+          <span class="project-name">MOF</span>
+          <span class="project-meta">Hospitality &amp; brand strategy · Türkiye</span>
+        </div>
+        <p class="project-desc">A hospitality experience and brand world built from Aegean stone, olive and slow light.</p>
+      </a>
+
+      <a class="project" href="#work">
+        <div class="box">
+          <div class="kit">
+            <div class="swatches" style="--d: 200ms"><span style="--c: #f3eee5"></span><span style="--c: #dcd5c8"></span><span style="--c: #9aa79a"></span><span style="--c: #7e8fa3"></span><span style="--c: #4f5b66"></span></div>
+            <div class="lines" style="--d: 280ms"><span>Return to yourself</span><span>The protected hour</span><span>One question</span></div>
+            <ul class="pills" style="--d: 360ms"><li>Linen</li><li>Low light</li><li>Held silence</li></ul>
+          </div>
+          <div class="lid"><img src="assets/reset-cover.jpg" alt="ReSET Studio — The Statler Hotel, reimagining the guest experience" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="project-head">
+          <span class="project-name">ReSET Studio</span>
+          <span class="project-meta">Service design · Statler Hotel</span>
+        </div>
+        <p class="project-desc">A guest experience for travelers who arrive depleted.</p>
+      </a>
+
+      <a class="project" href="#work">
+        <div class="box">
+          <div class="kit">
+            <div class="swatches" style="--d: 200ms"><span style="--c: #e6a3a9"></span><span style="--c: #9fb57f"></span><span style="--c: #4b3026"></span><span style="--c: #f0a85e"></span><span style="--c: #f1ddaa"></span></div>
+            <div class="lines" style="--d: 280ms"><span>One-handed mornings</span><span>Steady, not spiky</span><span>Four moods</span></div>
+            <ul class="pills" style="--d: 360ms"><li>Pouch</li><li>Green tea</li><li>Serif wordmark</li></ul>
+          </div>
+          <div class="lid"><img src="assets/yoca-cover.jpg" alt="YOCA — high-protein yogurt with natural caffeine" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="project-head">
+          <span class="project-name">YOCA</span>
+          <span class="project-meta">Brand identity · Hackathon</span>
+        </div>
+        <p class="project-desc">A protein-and-caffeine yogurt built as one brand world.</p>
+      </a>
+
+      <a class="project" href="#work">
+        <div class="box">
+          <div class="kit">
+            <div class="swatches" style="--d: 200ms"><span style="--c: #ece3d6"></span><span style="--c: #c9b9a3"></span><span style="--c: #2f2b28"></span><span style="--c: #2f8a85"></span><span style="--c: #e3a53c"></span></div>
+            <div class="lines" style="--d: 280ms"><span>Shop local</span><span>Support Cornell</span><span>Campus to Commons</span></div>
+            <ul class="pills" style="--d: 360ms"><li>Mobile app</li><li>Student discounts</li><li>Local partners</li></ul>
+          </div>
+          <div class="lid"><img src="assets/ithacard-cover.jpg" alt="IthaCard — connecting Cornell students with local Ithaca businesses" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="project-head">
+          <span class="project-name">IthaCard</span>
+          <span class="project-meta">App concept · Ithaca, NY</span>
+        </div>
+        <p class="project-desc">Connecting Cornell students with local Ithaca businesses.</p>
+      </a>
+
+      <a class="project" href="#work">
+        <div class="box">
+          <div class="kit">
+            <div class="swatches" style="--d: 200ms"><span style="--c: #e7e4d8"></span><span style="--c: #7f9a6a"></span><span style="--c: #3c4a34"></span><span style="--c: #b88a4a"></span><span style="--c: #d8cbb0"></span></div>
+            <div class="lines" style="--d: 280ms"><span>A changing climate</span><span>Plants as evidence</span><span>Walk and notice</span></div>
+            <ul class="pills" style="--d: 360ms"><li>Wayfinding</li><li>Signage</li><li>Garden visitors</li></ul>
+          </div>
+          <div class="lid"><img src="assets/botanic-cover.jpg" alt="Cornell Botanic Gardens — Climate Change Demonstration Garden" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="project-head">
+          <span class="project-name">Cornell Botanic Gardens</span>
+          <span class="project-meta">Climate Change Demonstration Garden</span>
+        </div>
+        <p class="project-desc">An experience for the Climate Change Demonstration Garden.</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="contact pad">
+    <div class="contact-links">
+      <a class="contact-email" href="mailto:hello@milahaffar.com">hello@milahaffar.com</a>
+      <a class="contact-social" href="https://linkedin.com">LinkedIn</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer pad">
+  <span>Mila Haffar</span>
+  <span>Ithaca, NY</span>
+</footer>
+
 </body>
 </html>
