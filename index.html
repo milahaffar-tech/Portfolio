@@ -1,160 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-world="home">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mila Haffar — Creative Strategy &amp; Experience Design</title>
-<meta name="description" content="Mila Haffar is a Cornell student studying Cognitive Science and Design &amp; Environmental Analysis. Her work sits where consumer psychology, strategy, and design overlap.">
+<meta name="description" content="Mila Haffar studies Cognitive Science and Design &amp; Environmental Analysis at Cornell. A diary of how she thinks, in six rooms: hospitality, service design, brand identity, an app, wayfinding and a lamp.">
+<meta name="theme-color" content="#241916">
+<script>(function(d){d.classList.add('js');try{var v=new URLSearchParams(location.search).get('direction')||localStorage.getItem('direction');if(/^(velvet|notebook|stone)$/.test(v))d.dataset.direction=v}catch(e){}})(document.documentElement);</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&amp;family=Marcellus&amp;family=Fraunces:opsz,wght,SOFT,WONK@144,700,100,1&amp;family=DM+Sans:opsz,wght@9..40,600&amp;family=Cormorant+Garamond:ital,wght@1,500&amp;family=Shippori+Mincho:wght@500&amp;display=swap&amp;text=%20ABCEFGIKMORSTYacdeghiklnorstuw">
 <link rel="stylesheet" href="css/styles.css">
 <script src="js/mila.js" defer></script>
+<script src="js/site.js" defer></script>
+<script src="js/directions.js" defer></script>
 </head>
-<body>
+<body id="top">
+<a class="skip" href="#contents">Skip to the work</a>
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<nav class="nav pad">
-  <a class="nav-brand" href="index.html">MILA HAFFAR</a>
-  <a href="index.html#work" aria-current="page">Work</a>
-  <a href="contact.html">Contact</a>
-  <a href="about.html">About</a>
-</nav>
+<header class="topbar">
+  <a class="brand" href="index.html">Mila Haffar</a>
+  <nav class="topnav" aria-label="Main">
+    <a class="hide-sm" href="#contents">The rooms</a>
+    <a href="about.html">My story</a>
+    <a href="contact.html">Write to me</a>
+  </nav>
+  <div class="dock" aria-hidden="true">
+    <div class="mila" data-mila="dock"></div>
+    <div class="dock-text"><span class="dock-num">Room I of VI</span><span class="dock-chapter">On going deeper</span></div>
+  </div>
+</header>
 
 <main>
-  <header id="top" class="hero pad">
-    <div class="hero-rule"></div>
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="eyebrow">Creative strategy &amp; experience design</div>
-        <h1 class="hero-title">Finding unity in individuality.</h1>
-        <p class="hero-lead">I'm Mila, a Cornell student studying Cognitive Science and Design &amp; Environmental Analysis. My work sits where consumer psychology, strategy, and design overlap. I think strong experiences are curated, not assembled, so I start with research into how people actually think and feel, and let that shape every decision after it.</p>
-        <ul class="pills hero-pills">
-          <li>Hospitality</li>
-          <li>Consumer Psychology</li>
-          <li>Experience Design</li>
-          <li>Brand Strategy</li>
-          <li>AI Tools</li>
-        </ul>
-      </div>
-      <div class="hero-mark">
-        <div id="mila" class="mila" role="img" aria-label="Mila, handwritten"></div>
-      </div>
+  <section class="prologue" data-world="home" aria-labelledby="prologue-title">
+    <p class="label prologue-label">Creative strategy &amp; experience design · Cornell</p>
+    <div class="mila mila--hero" data-mila="hero" role="img" aria-label="Mila, handwritten, in four separate letters"></div>
+    <h1 class="prologue-title" id="prologue-title">Finding unity <em>in individuality.</em></h1>
+    <div class="prologue-note">
+      <p class="salutation">Dear reader,</p>
+      <p>I'm Mila. I study Cognitive Science and Design &amp; Environmental Analysis at Cornell. Since I was little I've looked at things through other people's eyes, and filled notebooks with the people I imagined.</p>
+      <p>This is one of those notebooks. Six rooms, six projects, each one a piece of me. Walk through, and watch the pieces come together.</p>
     </div>
-  </header>
+    <a class="cue" href="#contents">Begin<span class="cue-line" aria-hidden="true"></span></a>
+  </section>
 
-  <section id="work" class="work pad">
-    <div class="work-head">
-      <h2>Selected work</h2>
-      <span class="work-hint">Hover to open</span>
-    </div>
-
-    <div class="work-grid">
-      <a class="project" href="work/mof.html">
-        <div class="box">
-          <div class="kit kit-brief">
-            <div class="kit-top" style="--d: 200ms"><span>Creative strategy · Hospitality</span><span class="arrow">↗</span></div>
-            <div class="kit-copy" style="--d: 260ms">
-              <span class="kit-name">MOF</span>
-              <span class="kit-quote">Turkish culture, woven in.</span>
-              <span class="kit-body">One of three positioning territories for a new ultra-luxury Turkish hotel group. Built on the family's textile roots, what luxury travelers really want, and a crowded Antalya market.</span>
-            </div>
-            <ul class="pills" style="--d: 320ms"><li>Brand Positioning</li><li>Cultural Research</li><li>Audience Insight</li></ul>
-            <div class="kit-cta" style="--d: 380ms"><span>Explore project</span><span class="arrow">↗</span></div>
-          </div>
-          <div class="lid"><img src="assets/mof-cover.jpg" alt="MOF — Hospitality Experience &amp; Brand Strategy, Türkiye" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="project-head">
-          <span class="project-name">MOF</span>
-          <span class="project-meta">Hospitality &amp; brand strategy · Türkiye</span>
-        </div>
-        <p class="project-desc">A positioning for a new luxury Turkish hotel group that goes deeper, not bigger: culture as the experience, hospitality as a blessing, and a brand with roots that can travel.</p>
-      </a>
-
-      <a class="project" href="work/reset-studio.html">
-        <div class="box">
-          <div class="kit">
-            <div class="swatches" style="--d: 200ms"><span style="--c: #f3eee5"></span><span style="--c: #dcd5c8"></span><span style="--c: #9aa79a"></span><span style="--c: #7e8fa3"></span><span style="--c: #4f5b66"></span></div>
-            <div class="lines" style="--d: 280ms"><span>Return to yourself</span><span>Slate, walnut, water</span><span>Rest is the amenity</span></div>
-            <ul class="pills" style="--d: 360ms"><li>Three personas</li><li>Journey map</li><li>Amenity kit</li></ul>
-          </div>
-          <div class="lid"><img src="assets/reset-cover.jpg" alt="ReSET Studio — The Statler Hotel, reimagining the guest experience" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="project-head">
-          <span class="project-name">ReSET Studio</span>
-          <span class="project-meta">Service design · Statler Hotel · DEA 1110</span>
-        </div>
-        <p class="project-desc">A room redesign that brings Ithaca's nature inside for guests who arrive between busy travel and busy campus events, and mostly need rest.</p>
-      </a>
-
-      <a class="project" href="work/yoca.html">
-        <div class="box">
-          <div class="kit">
-            <div class="swatches" style="--d: 200ms"><span style="--c: #e6a3a9"></span><span style="--c: #9fb57f"></span><span style="--c: #4b3026"></span><span style="--c: #f0a85e"></span><span style="--c: #f1ddaa"></span></div>
-            <div class="lines" style="--d: 280ms"><span>One pouch, two needs</span><span>20g protein, 100mg caffeine</span><span>Four flavors</span></div>
-            <ul class="pills" style="--d: 360ms"><li>Naming</li><li>Visual identity</li><li>Pitch graphics</li></ul>
-          </div>
-          <div class="lid"><img src="assets/yoca-cover.jpg" alt="YOCA — high-protein yogurt with natural caffeine" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="project-head">
-          <span class="project-name">YOCA</span>
-          <span class="project-meta">Brand identity · Cornell Food Hackathon 2025</span>
-        </div>
-        <p class="project-desc">A caffeinated, high-protein Greek yogurt in a squeezable pouch, so a coffee and a protein bar become one thing. I led concept, branding, and graphics.</p>
-      </a>
-
-      <a class="project" href="work/ithacard.html">
-        <div class="box">
-          <div class="kit">
-            <div class="swatches" style="--d: 200ms"><span style="--c: #ece3d6"></span><span style="--c: #c9b9a3"></span><span style="--c: #2f2b28"></span><span style="--c: #2f8a85"></span><span style="--c: #e3a53c"></span></div>
-            <div class="lines" style="--d: 280ms"><span>Campus to Commons</span><span>A reason to go</span><span>Rewarded for coming back</span></div>
-            <ul class="pills" style="--d: 360ms"><li>Interviews</li><li>Rewards tiers</li><li>Maps prototype</li></ul>
-          </div>
-          <div class="lid"><img src="assets/ithacard-cover.jpg" alt="IthaCard — connecting Cornell students with local Ithaca businesses" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="project-head">
-          <span class="project-name">IthaCard</span>
-          <span class="project-meta">App concept · AEM 3110 · Ithaca, NY</span>
-        </div>
-        <p class="project-desc">An app that gives Cornell students a reason to leave Collegetown and gives local businesses loyal customers, shaped by interviews on both sides of the counter.</p>
-      </a>
-
-      <a class="project" href="work/botanic-gardens.html">
-        <div class="box">
-          <div class="kit">
-            <div class="swatches" style="--d: 200ms"><span style="--c: #e7e4d8"></span><span style="--c: #7f9a6a"></span><span style="--c: #3c4a34"></span><span style="--c: #b88a4a"></span><span style="--c: #d8cbb0"></span></div>
-            <div class="lines" style="--d: 280ms"><span>How nature protects</span><span>How nature thrives</span><span>Start anywhere</span></div>
-            <ul class="pills" style="--d: 360ms"><li>Narrative</li><li>Leaf markers</li><li>Route map</li></ul>
-          </div>
-          <div class="lid"><img src="assets/botanic-cover.jpg" alt="Cornell Botanic Gardens — Climate Route wayfinding" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="project-head">
-          <span class="project-name">Cornell Botanic Gardens</span>
-          <span class="project-meta">Wayfinding · Climate Route · DEA 5540</span>
-        </div>
-        <p class="project-desc">A wayfinding system that turns eight scattered gardens into one Climate Route, with a single story about how nature protects and thrives in a warming world.</p>
-      </a>
-
-      <a class="project" href="work/studio-kintsu.html">
-        <div class="box">
-          <div class="kit">
-            <div class="swatches" style="--d: 200ms"><span style="--c: #f4efe6"></span><span style="--c: #d4a83c"></span><span style="--c: #a9b797"></span><span style="--c: #b07a5a"></span><span style="--c: #3a3431"></span></div>
-            <div class="lines" style="--d: 280ms"><span>Break, repair, grow</span><span>From healing to growing</span><span>A seed on top</span></div>
-            <ul class="pills" style="--d: 360ms"><li>Concept</li><li>Form</li><li>Product story</li></ul>
-          </div>
-          <div class="lid"><div class="lid-placeholder" role="img" aria-label="Studio Kintsu — Grow Through the Cracks, cover image to come"><span>Grow Through the Cracks</span></div></div>
-        </div>
-        <div class="project-head">
-          <span class="project-name">Studio Kintsu</span>
-          <span class="project-meta">Product design · Lamp</span>
-        </div>
-        <p class="project-desc">Grow Through the Cracks, a lamp that reads kintsugi as a story of growth: a fractured ceramic base, three floral shades, and a seed at the top.</p>
-      </a>
+  <section class="contents" id="contents" data-world="home" aria-labelledby="contents-title">
+    <div class="contents-inner" data-reveal>
+      <div class="contents-head">
+        <h2 class="label" id="contents-title">Contents</h2>
+        <span class="contents-hint">Hover a cover to lift its lid.</span>
+      </div>
+      <ol>
+        <li data-world="mof"><a href="#room-mof"><span class="c-num">I</span><span class="c-title">On going deeper</span><span class="c-leader" aria-hidden="true"></span><span class="c-proj">MOF</span></a></li>
+        <li data-world="reset"><a href="#room-reset"><span class="c-num">II</span><span class="c-title">On rest</span><span class="c-leader" aria-hidden="true"></span><span class="c-proj">ReSET Studio</span></a></li>
+        <li data-world="yoca"><a href="#room-yoca"><span class="c-num">III</span><span class="c-title">On making two things one</span><span class="c-leader" aria-hidden="true"></span><span class="c-proj">YOCA</span></a></li>
+        <li data-world="ithacard"><a href="#room-ithacard"><span class="c-num">IV</span><span class="c-title">On a reason to go</span><span class="c-leader" aria-hidden="true"></span><span class="c-proj">IthaCard</span></a></li>
+        <li data-world="botanic"><a href="#room-botanic"><span class="c-num">V</span><span class="c-title">On turning eight into one</span><span class="c-leader" aria-hidden="true"></span><span class="c-proj">Botanic Gardens</span></a></li>
+        <li data-world="kintsu"><a href="#room-kintsu"><span class="c-num">VI</span><span class="c-title">On growing through the cracks</span><span class="c-leader" aria-hidden="true"></span><span class="c-proj">Studio Kintsu</span></a></li>
+      </ol>
     </div>
   </section>
 
+  <!-- Room I -->
+  <section class="room room--left" id="room-mof" data-world="mof" data-num="I" data-chapter="On going deeper" aria-labelledby="t-mof">
+    <header class="room-head" data-reveal>
+      <p class="label room-num">Room I</p>
+      <p class="room-chapter">On going deeper</p>
+    </header>
+    <a class="box" href="work/mof.html" aria-label="MOF: open the project" data-reveal style="--d: 120ms">
+      <div class="kit">
+        <div class="kit-top" style="--d: 200ms"><span class="label">Creative strategy · Hospitality</span><span class="kit-arrow" aria-hidden="true">↗</span></div>
+        <div class="swatches" style="--d: 240ms"><span style="--c: #f2ebe0"></span><span style="--c: #d9c7a7"></span><span style="--c: #9c8a63"></span><span style="--c: #5b6f86"></span><span style="--c: #2e3a46"></span></div>
+        <div class="lines" style="--d: 300ms"><span>Go deeper, not bigger</span><span>A guest is a blessing</span><span>Roots that travel</span></div>
+      </div>
+      <div class="lid"><img src="assets/mof-cover.jpg" alt="MOF — Hospitality Experience &amp; Brand Strategy, Türkiye" decoding="async"></div>
+    </a>
+    <div class="room-card" data-reveal style="--d: 200ms">
+      <p class="label room-kind">Hospitality &amp; brand strategy · Türkiye</p>
+      <h2 class="room-title title" id="t-mof"><a href="work/mof.html">MOF</a></h2>
+      <p class="room-quote">Turkish culture, woven in.</p>
+      <p class="room-desc">A positioning for a new luxury Turkish hotel group that goes deeper, not bigger: culture as the experience, hospitality as a blessing, and a brand with roots that can travel.</p>
+      <ul class="pills"><li>Brand positioning</li><li>Cultural research</li><li>Audience insight</li></ul>
+      <a class="enter" href="work/mof.html">Enter the room <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="note" data-reveal style="--d: 320ms">
+      <p class="note-label">From my notebook</p>
+      <p>Every resort in Antalya competes by adding more: bigger waterparks, longer buffets, another golf course. Whatever gets added gets copied. I kept asking what would happen if a hotel went deeper instead.</p>
+    </aside>
+  </section>
 
+  <!-- Room II -->
+  <section class="room room--right" id="room-reset" data-world="reset" data-num="II" data-chapter="On rest" aria-labelledby="t-reset">
+    <header class="room-head" data-reveal>
+      <p class="label room-num">Room II</p>
+      <p class="room-chapter">On rest</p>
+    </header>
+    <a class="box" href="work/reset-studio.html" aria-label="ReSET Studio: open the project" data-reveal style="--d: 120ms">
+      <div class="kit">
+        <div class="kit-top" style="--d: 200ms"><span class="label">Service design · Statler Hotel</span><span class="kit-arrow" aria-hidden="true">↗</span></div>
+        <div class="swatches" style="--d: 240ms"><span style="--c: #f3eee5"></span><span style="--c: #dcd5c8"></span><span style="--c: #9aa79a"></span><span style="--c: #7e8fa3"></span><span style="--c: #4f5b66"></span></div>
+        <div class="lines" style="--d: 300ms"><span>Return to yourself</span><span>Slate, walnut, water</span><span>Rest is the amenity</span></div>
+      </div>
+      <div class="lid"><img src="assets/reset-cover.jpg" alt="ReSET Studio — The Statler Hotel, reimagining the guest experience" loading="lazy" decoding="async"></div>
+    </a>
+    <div class="room-card" data-reveal style="--d: 200ms">
+      <p class="label room-kind">Service design · Statler Hotel · DEA 1110</p>
+      <h2 class="room-title title" id="t-reset"><a href="work/reset-studio.html">ReSET Studio</a></h2>
+      <p class="room-quote">Return to yourself.</p>
+      <p class="room-desc">A room redesign that brings Ithaca's nature inside for guests who arrive between busy travel and busy campus events, and mostly need rest.</p>
+      <ul class="pills"><li>Three personas</li><li>Journey map</li><li>Amenity kit</li></ul>
+      <a class="enter" href="work/reset-studio.html">Enter the room <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="note" data-reveal style="--d: 320ms">
+      <p class="note-label">From my notebook</p>
+      <p>Guests reach the Statler between a long trip and a big campus event: a graduation, a reunion, a talk. They don't need more to do. They need rest, and Ithaca's gorges, stone and water already know how to give it.</p>
+    </aside>
+  </section>
+
+  <!-- Room III -->
+  <section class="room room--wide" id="room-yoca" data-world="yoca" data-num="III" data-chapter="On making two things one" aria-labelledby="t-yoca">
+    <header class="room-head" data-reveal>
+      <p class="label room-num">Room III</p>
+      <p class="room-chapter">On making two things one</p>
+    </header>
+    <a class="box" href="work/yoca.html" aria-label="YOCA: open the project" data-reveal style="--d: 120ms">
+      <div class="kit">
+        <div class="kit-top" style="--d: 200ms"><span class="label">Brand identity · Food Hackathon</span><span class="kit-arrow" aria-hidden="true">↗</span></div>
+        <div class="swatches" style="--d: 240ms"><span style="--c: #e6a3a9"></span><span style="--c: #9fb57f"></span><span style="--c: #4b3026"></span><span style="--c: #f0a85e"></span><span style="--c: #f1ddaa"></span></div>
+        <div class="lines" style="--d: 300ms"><span>One pouch, two needs</span><span>20g protein, 100mg caffeine</span><span>Four flavors</span></div>
+      </div>
+      <div class="lid" style="--focus: 50% 18%"><img src="assets/yoca-cover.jpg" alt="YOCA — high-protein yogurt with natural caffeine" loading="lazy" decoding="async"></div>
+    </a>
+    <div class="room-card" data-reveal style="--d: 200ms">
+      <p class="label room-kind">Brand identity · Cornell Food Hackathon 2025</p>
+      <h2 class="room-title title" id="t-yoca"><a href="work/yoca.html">YOCA</a></h2>
+      <p class="room-quote">One pouch, two needs.</p>
+      <p class="room-desc">A caffeinated, high-protein Greek yogurt in a squeezable pouch, so a coffee and a protein bar become one thing. I led concept, branding, and graphics.</p>
+      <ul class="pills"><li>Naming</li><li>Visual identity</li><li>Pitch graphics</li></ul>
+      <a class="enter" href="work/yoca.html">Enter the room <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="note" data-reveal style="--d: 320ms">
+      <p class="note-label">From my notebook</p>
+      <p>Meet Amanda. She drinks a coffee to stay awake and grabs a protein bar to stay full. Two products for one morning. So we made them one.</p>
+    </aside>
+  </section>
+
+  <!-- Room IV -->
+  <section class="room room--left" id="room-ithacard" data-world="ithacard" data-num="IV" data-chapter="On a reason to go" aria-labelledby="t-ithacard">
+    <header class="room-head" data-reveal>
+      <p class="label room-num">Room IV</p>
+      <p class="room-chapter">On a reason to go</p>
+    </header>
+    <a class="box" href="work/ithacard.html" aria-label="IthaCard: open the project" data-reveal style="--d: 120ms">
+      <div class="kit">
+        <div class="kit-top" style="--d: 200ms"><span class="label">App concept · Ithaca, NY</span><span class="kit-arrow" aria-hidden="true">↗</span></div>
+        <div class="swatches" style="--d: 240ms"><span style="--c: #ece3d6"></span><span style="--c: #c9b9a3"></span><span style="--c: #2f2b28"></span><span style="--c: #2f8a85"></span><span style="--c: #e3a53c"></span></div>
+        <div class="lines" style="--d: 300ms"><span>Campus to Commons</span><span>A reason to go</span><span>Rewarded for coming back</span></div>
+      </div>
+      <div class="lid"><img src="assets/ithacard-cover.jpg" alt="IthaCard — connecting Cornell students with local Ithaca businesses" loading="lazy" decoding="async"></div>
+    </a>
+    <div class="room-card" data-reveal style="--d: 200ms">
+      <p class="label room-kind">App concept · AEM 3110 · Ithaca, NY</p>
+      <h2 class="room-title title" id="t-ithacard"><a href="work/ithacard.html">IthaCard</a></h2>
+      <p class="room-quote">Campus to Commons.</p>
+      <p class="room-desc">An app that gives Cornell students a reason to leave Collegetown and gives local businesses loyal customers, shaped by interviews on both sides of the counter.</p>
+      <ul class="pills"><li>Interviews</li><li>Rewards tiers</li><li>Maps prototype</li></ul>
+      <a class="enter" href="work/ithacard.html">Enter the room <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="note" data-reveal style="--d: 320ms">
+      <p class="note-label">From my notebook</p>
+      <p>In our research, 83% felt disconnected from Ithaca beyond campus. Google and Yelp already list the places. What was missing was a reason to go, and a reason to come back.</p>
+    </aside>
+  </section>
+
+  <!-- Room V -->
+  <section class="room room--right" id="room-botanic" data-world="botanic" data-num="V" data-chapter="On turning eight into one" aria-labelledby="t-botanic">
+    <header class="room-head" data-reveal>
+      <p class="label room-num">Room V</p>
+      <p class="room-chapter">On turning eight into one</p>
+    </header>
+    <a class="box" href="work/botanic-gardens.html" aria-label="Cornell Botanic Gardens: open the project" data-reveal style="--d: 120ms">
+      <div class="kit">
+        <div class="kit-top" style="--d: 200ms"><span class="label">Wayfinding · Climate Route</span><span class="kit-arrow" aria-hidden="true">↗</span></div>
+        <div class="swatches" style="--d: 240ms"><span style="--c: #e7e4d8"></span><span style="--c: #7f9a6a"></span><span style="--c: #3c4a34"></span><span style="--c: #b88a4a"></span><span style="--c: #d8cbb0"></span></div>
+        <div class="lines" style="--d: 300ms"><span>How nature protects</span><span>How nature thrives</span><span>Start anywhere</span></div>
+      </div>
+      <div class="lid"><img src="assets/botanic-cover.jpg" alt="Cornell Botanic Gardens — Climate Route wayfinding" loading="lazy" decoding="async"></div>
+    </a>
+    <div class="room-card" data-reveal style="--d: 200ms">
+      <p class="label room-kind">Wayfinding · Climate Route · DEA 5540</p>
+      <h2 class="room-title title" id="t-botanic"><a href="work/botanic-gardens.html">Cornell Botanic Gardens</a></h2>
+      <p class="room-quote">Eight gardens, one story.</p>
+      <p class="room-desc">A wayfinding system that turns eight scattered gardens into one Climate Route, with a single story about how nature protects and thrives in a warming world.</p>
+      <ul class="pills"><li>Narrative</li><li>Leaf markers</li><li>Route map</li></ul>
+      <a class="enter" href="work/botanic-gardens.html">Enter the room <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="note" data-reveal style="--d: 320ms">
+      <p class="note-label">From my notebook</p>
+      <p>Eight scattered gardens don't feel like a journey on their own. So before we designed a single sign, we gave them one story to tell: how nature protects, and how it thrives.</p>
+    </aside>
+  </section>
+
+  <!-- Room VI -->
+  <section class="room room--wide" id="room-kintsu" data-world="kintsu" data-num="VI" data-chapter="On growing through the cracks" aria-labelledby="t-kintsu">
+    <header class="room-head" data-reveal>
+      <p class="label room-num">Room VI</p>
+      <p class="room-chapter">On growing through the cracks</p>
+    </header>
+    <a class="box" href="work/studio-kintsu.html" aria-label="Studio Kintsu: open the project" data-reveal style="--d: 120ms">
+      <div class="kit">
+        <div class="kit-top" style="--d: 200ms"><span class="label">Product design · Lamp</span><span class="kit-arrow" aria-hidden="true">↗</span></div>
+        <div class="swatches" style="--d: 240ms"><span style="--c: #f4efe6"></span><span style="--c: #d4a83c"></span><span style="--c: #a9b797"></span><span style="--c: #b07a5a"></span><span style="--c: #3a3431"></span></div>
+        <div class="lines" style="--d: 300ms"><span>Break, repair, grow</span><span>From healing to growing</span><span>A seed on top</span></div>
+      </div>
+      <div class="lid">
+        <div class="lid-art" role="img" aria-label="Studio Kintsu — Grow Through the Cracks. Gold fills the cracks in dark ceramic, with new leaves at their ends.">
+          <span class="label">Studio Kintsu</span>
+          <span class="lid-art-title">Grow Through the Cracks</span>
+        </div>
+      </div>
+    </a>
+    <div class="room-card" data-reveal style="--d: 200ms">
+      <p class="label room-kind">Product design · Lamp · Studio Kintsu</p>
+      <h2 class="room-title title" id="t-kintsu"><a href="work/studio-kintsu.html">Studio Kintsu</a></h2>
+      <p class="room-quote">Break, repair, grow.</p>
+      <p class="room-desc">Grow Through the Cracks, a lamp that reads kintsugi as a story of growth: a fractured ceramic base, three floral shades, and a seed at the top.</p>
+      <ul class="pills"><li>Concept</li><li>Form</li><li>Product story</li></ul>
+      <a class="enter" href="work/studio-kintsu.html">Enter the room <span aria-hidden="true">→</span></a>
+    </div>
+    <aside class="note" data-reveal style="--d: 320ms">
+      <p class="note-label">From my notebook</p>
+      <p>Kintsugi says a bowl is more beautiful for having been broken. I wanted my lamp to take that one step further: from healing to growing.</p>
+    </aside>
+  </section>
+
+  <section class="epilogue" id="epilogue" data-world="home" aria-labelledby="epilogue-title">
+    <h2 class="label" id="epilogue-title" data-reveal>Epilogue</h2>
+    <div class="epi-text" data-reveal style="--d: 120ms">
+      <p>Looking back, the rooms keep doing the same thing. Two products become one pouch. Eight gardens become one route. Students and locals end up at the same table.</p>
+      <p>I take separate pieces and look for what holds them together. It's how my mind works. <em>It's how my name comes together, too.</em></p>
+    </div>
+    <div class="mila mila--finale" data-mila="finale" role="img" aria-label="Mila's handwritten signature"></div>
+    <div class="ps" data-reveal>
+      <p><span class="ps-mark">P.S.</span>For projects, internships, or a conversation about design and how people think, write to me.</p>
+      <a class="ps-email" href="mailto:hello@milahaffar.com">hello@milahaffar.com</a>
+      <div class="ps-links"><a href="https://linkedin.com">LinkedIn</a><a href="about.html">Read my story</a></div>
+    </div>
+  </section>
 </main>
 
-<footer class="footer pad">
-  <span>Mila Haffar</span>
-  <span>Ithaca, NY</span>
+<footer class="footer">
+  <span>Mila Haffar · Ithaca, NY</span>
+  <a href="#top">Back to the beginning ↑</a>
 </footer>
 
 </body>

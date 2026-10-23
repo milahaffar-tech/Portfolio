@@ -1,13 +1,47 @@
 # Mila Haffar — Portfolio
 
-Static site built from the Claude Design file `Portfolio v2.dc.html`. Plain HTML, CSS and one small script. No build step.
+A diary in six rooms. Plain HTML, CSS and two small scripts. No build step.
 
-- `index.html`: hero and selected work (6 projects).
-- `about.html`, `contact.html`: the About and Contact pages.
-- `work/*.html`: one case-study page per project (brief, what I did, solution). Each links to the next.
-- `css/styles.css`: Modernist design tokens plus page styles. The cover "lid" flip on hover is pure CSS.
-- `js/mila.js`: the handwritten "Mila" in the hero. Scrolling at the top of the page pulls the letters together.
-- `assets/`: project covers and the handwriting pieces (`assets/handwriting/p_*.png`).
+## Direction
+
+From Mila's portfolio direction survey (Ember, October 2026):
+
+- **Big idea:** unity in individuality, carried through the whole site. Her separate handwritten letters gather as you walk through the rooms and join into her signature at the end.
+- **Journey:** one continuous story, chapter by chapter. Each project is a room with its own chapter title ("On going deeper", "On rest", …).
+- **Each project is its own world:** every room has its own light, accent color, title typeface and a faint texture.
+- **Feel:** golden hour after dark, velvet, film grain and ceramic; a diary entry, not a museum label; a handwritten note. Closest feel: Aman.
+- **Kept from the last site:** the handwritten "Mila", covers that open like a box, cream and oxblood.
+
+## Three directions to try
+
+A switcher in the corner of every page ("Try a direction") swaps the whole site between three readings of the survey, so Mila can feel each one before choosing:
+
+- **Velvet** (default): golden hour after dark. An evening exhibition, room by room: velvet, film grain, letters in colored ink. From her dials (dark, alive with motion), museum exhibitions, velvet and film grain.
+- **Notebook**: the personal diary from her own words. Cream paper, ruled lines and a margin line, photos taped onto the page, graphite handwriting. From diary entry, handwritten letter, notebooks and sketchbooks, golden hour.
+- **Stone**: a slow stay at a Mediterranean hotel. Warm limestone, arched doorways, shutter shadows, notes as cards left on the pillow. From Aman, boutique hotels, Aegean stone, ceramic and living room.
+
+The choice is remembered in the browser and kept in the address, so a link like `index.html?direction=stone` opens straight into one. Once she picks, delete `js/directions.js` and its `<script>` tags, the `?direction` part of each page's head script, and the "— directions —" styles except the chosen direction's rules.
+
+## Pages
+
+- `index.html`: the story. Prologue, contents, six rooms, epilogue.
+- `about.html`: "My story", set as a letter and signed.
+- `contact.html`: email and LinkedIn.
+- `work/*.html`: one page per room (brief, what I did, solution). Each takes its room's world and links to the rooms on either side.
+
+## Files
+
+- `css/styles.css`: tokens, the six worlds (`[data-world="…"]`), and all page styles.
+- `js/mila.js`: the handwritten name, cut from `assets/handwriting/p_*.png`. `Mila.create(el)` returns `set(p, { spread })`: `spread` is how far apart the four letters sit, `p` is the joining gesture (0 apart, 1 signed). `data-mila="static"` draws the joined signature with no motion.
+- `js/directions.js`: the direction switcher (see above).
+- `js/site.js`: fade-ins on every page. On the story page it also switches the light as each room reaches the middle of the screen, lifts covers on touch screens, and drives the name: apart in the prologue, closer room by room in the top bar, joined in the epilogue.
+- `assets/`: project covers, the handwriting pieces, and `kintsu-cracks.svg` (the Studio Kintsu cover until a photo arrives).
+
+Motion respects `prefers-reduced-motion`: no grain or drifting, covers fade instead of flipping, and the signature is shown joined.
+
+## Type
+
+Google Fonts. Newsreader is the voice for all text. Each room's title has its own face, loaded only for the letters it uses: Bodoni Moda (MOF), Marcellus (ReSET Studio), Fraunces (YOCA), DM Sans (IthaCard), Cormorant Garamond (Botanic Gardens), Shippori Mincho (Studio Kintsu).
 
 ## Preview locally
 
@@ -18,10 +52,10 @@ python3 -m http.server 8000
 
 ## Editing copy
 
-All copy is inline HTML. Homepage text is in `index.html`, About in `about.html`, and each case study is its own file under `work/`.
+All copy is inline HTML. Room cards and notebook notes are in `index.html`; each case study is its own file under `work/`, and its notebook note repeats the one on the homepage.
 
 ## Notes
 
-- Type is Freight Display Pro, with Georgia as the fallback. Freight only shows if an Adobe Fonts kit for it is added to `<head>`.
-- The Studio Kintsu card uses a placeholder cover (`.lid-placeholder`) until a photo is added to `assets/`.
+- The prologue, chapter titles, notebook notes and epilogue are new copy written in Mila's voice from her own case studies and story. She should read them and change anything that doesn't sound like her.
+- Studio Kintsu still uses a drawn placeholder cover (`.lid-art`).
 - The LinkedIn link is still the generic `https://linkedin.com`.
