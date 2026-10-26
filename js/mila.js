@@ -30,24 +30,37 @@
     dark: { M: '#8fa4d2', I: '#8db79c', L: '#d9907e', A: '#b59bd2', end: '#f0e8dd' },
     light: { M: '#1f3a8a', I: '#14532d', L: '#991b1b', A: '#581c87', end: '#2a201c' },
   };
-  // When each letter travels, as a share of p (the original timeline). Then
-  // the extra strokes fade, the inks unify, and the dot lands last.
-  const WINDOWS = { M: [0.04, 0.6, 'move'], I: [0.04, 0.6, 'move'], L: [0.08, 0.64, 'move'], A: [0.12, 0.74, 'smooth'] };
-  const UNIFY = [0.32, 0.74];
-  const DOT = [0.78, 1];
+  // The gesture, as shares of p. The letters set off a beat apart and arrive
+  // together, so nothing waits half-joined. The strokes that fold into the A
+  // dissolve as they land, the inks turn to one, and the dot settles last.
+  const WINDOWS = { M: [0, 0.72], A: [0.02, 0.74], I: [0.05, 0.74], L: [0.08, 0.74] };
+  // A small rise on the way, in drawing units, so the i and L sweep in
+  // rather than slide; zero at both ends.
+  const ARC = { M: 0, A: 0, I: -26, L: -18 };
+  const DISSOLVE = [0.34, 0.58];
+  const UNIFY = [0.4, 0.86];
+  const DOT = [0.18, 0.96];
+  const DOT_ARC = -46;
 
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
   const cl = (v) => clamp(v, 0, 1);
-  const EASE = {
-    smooth: (t) => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1),
-    move: (t) => {
-      const c1 = 1.70158, c3 = c1 + 1;
-      return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
-    },
+  // CSS-style cubic-bezier easing: x(s) is solved for s by Newton's method.
+  const bezier = (x1, y1, x2, y2) => {
+    const f = (a, b, s) => 3 * a * s * (1 - s) ** 2 + 3 * b * s * s * (1 - s) + s ** 3;
+    const df = (a, b, s) => 3 * a * (1 - s) ** 2 + 6 * (b - a) * s * (1 - s) + 3 * (1 - b) * s * s;
+    return (t) => {
+      if (t <= 0 || t >= 1) return cl(t);
+      let s = t;
+      for (let i = 0; i < 6; i++) s -= (f(x1, x2, s) - t) / (df(x1, x2, s) || 1);
+      return f(y1, y2, cl(s));
+    };
   };
-  const prog = (p, [a, b], ease = EASE.smooth) => ease(cl((p - a) / (b - a)));
+  const EASE = {
+    glide: bezier(0.35, 0, 0.25, 1),  // an unhurried start, a long soft landing
+    fade: bezier(0.4, 0, 0.6, 1),
+  };
+  const prog = (p, [a, b], ease = EASE.fade) => ease(cl((p - a) / (b - a)));
   const lerp = (a, b, t) => a + (b - a) * t;
-  const bump = (p, [a, b]) => Math.sin(Math.PI * cl((p - a) / (b - a)));
   const mixHex = (a, b, t) => {
     const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
     const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
@@ -147,10 +160,11 @@
         lastUnify = unify;
       }
 
+      const dissolve = 1 - prog(p, DISSOLVE);
       const motion = {};
       for (const L in WINDOWS) {
-        const [a, b, ease] = WINDOWS[L];
-        motion[L] = { t: prog(p, [a, b], EASE[ease]), lift: (L === 'A' ? -90 : -45) * bump(p, [a, a + (b - a) * 0.9]) };
+        const t = prog(p, WINDOWS[L], EASE.glide);
+        motion[L] = { t, lift: ARC[L] * Math.sin(Math.PI * t) };
       }
 
       for (const { pc, g } of parts) {
@@ -170,16 +184,14 @@
           tf = `translate(${m[0].toFixed(2)} ${m[1].toFixed(2)}) rotate(${deg(ang(sub(b2, a2)))}) scale(${k.toFixed(4)} 1) rotate(${deg(-th0)}) translate(${(-m0[0]).toFixed(2)} ${(-m0[1]).toFixed(2)})`;
         }
         g.setAttribute('transform', tf);
-        g.setAttribute('opacity', pc.merge ? (1 - unify).toFixed(3) : 1);
+        g.setAttribute('opacity', pc.merge ? dissolve.toFixed(3) : 1);
       }
 
-      // The dot travels with the i, waits just above the word, and lands last.
-      const di = motion.I, [dx0, dy0] = apart('I', di.t, time);
+      // The dot follows the i on a low arc, a little behind it, and settles last.
+      const e = prog(p, DOT, EASE.glide), [dx0, dy0] = apart('I', e, time);
       const ds = sep(DOT_SRC), dd = mer(DOT_DST);
-      const above = [dd[0] + 14, dd[1] - 110];
-      const wait = [lerp(ds[0] + dx0, above[0], di.t), lerp(ds[1] + dy0, above[1], di.t) + di.lift];
-      const land = prog(p, DOT, EASE.move);
-      const x = lerp(wait[0], dd[0], land) - ds[0], y = lerp(wait[1], dd[1], land) - ds[1];
+      const x = lerp(ds[0] + dx0, dd[0], e) - ds[0];
+      const y = lerp(ds[1] + dy0, dd[1], e) + DOT_ARC * Math.sin(Math.PI * e) - ds[1];
       dot.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)})`);
     }
 

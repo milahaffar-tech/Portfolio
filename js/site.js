@@ -98,7 +98,7 @@
   const finaleEl = document.querySelector('[data-mila="finale"]');
 
   // At the top: four letters, a beat to see them apart, then her M.
-  if (heroEl) gather(heroEl, Mila.create(heroEl, { crop: 'wide', float: 16 }), { spread: 1.6, delay: 1100, duration: 3200 });
+  if (heroEl) gather(heroEl, Mila.create(heroEl, { crop: 'wide', float: 16 }), { spread: 1.6, delay: 1000, duration: 3000 });
   // At the end, for anyone who read every chapter: the same gesture again.
-  if (finaleEl) gather(finaleEl, Mila.create(finaleEl, { crop: 'apart', float: 10 }), { spread: 1.15, delay: 400, duration: 3000 });
+  if (finaleEl) gather(finaleEl, Mila.create(finaleEl, { crop: 'apart', float: 10 }), { spread: 1.15, delay: 400, duration: 2800 });
 })();
