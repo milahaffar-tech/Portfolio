@@ -1,12 +1,14 @@
-/* Mila Haffar — a diary in six rooms.
-   Direction from Mila's portfolio survey (Ember, Oct 2026): golden hour after
-   dark, velvet, film grain and ceramic; a diary entry, not a museum label; each
-   project its own world; one continuous story as you scroll. */
+/* Mila Haffar — six projects from her notebook, in velvet.
+   Direction from Mila's portfolio survey (Ember, Oct 2026) and her notes on the
+   first version: golden hour after dark, velvet, film grain and ceramic; every
+   project in one place near the top; a story that unfolds below for anyone who
+   keeps scrolling; each project quietly its own world, never named as one. */
 
 /* — worlds —
-   The page's light is set by data-world on <html>. The story page changes it
-   as each room crosses the middle of the screen; case pages set it once.
-   Registered so the light can fade between rooms. */
+   The page's light is set by data-world on <html>. The homepage changes it
+   as each chapter crosses the middle of the screen (or while a cover in the
+   grid is pointed at); case pages set it once. Registered so the light can
+   fade from one project to the next. */
 @property --ground { syntax: '<color>'; inherits: true; initial-value: #241916; }
 @property --deep { syntax: '<color>'; inherits: true; initial-value: #150e0c; }
 @property --accent { syntax: '<color>'; inherits: true; initial-value: #c9a978; }
@@ -122,7 +124,7 @@ strong { font-weight: 600; }
 }
 .skip:focus { top: 14px; }
 
-.label, .brand, .c-num, .c-proj, .dock-num, .note-label, .letter h2, .case-meta dt, .step-num { font-family: var(--font-label); }
+.label, .brand, .index-line, .dock-num, .note-label, .letter h2, .case-meta dt, .step-num { font-family: var(--font-label); }
 .label {
   font-size: 12px; line-height: 1.4; letter-spacing: 0.22em; text-transform: uppercase;
   font-weight: 500; color: var(--muted); margin: 0;
@@ -132,7 +134,7 @@ strong { font-weight: 600; }
   font-variation-settings: var(--title-features); font-optical-sizing: auto;
 }
 
-/* — the room's light: ground, golden window light, velvet edges, film grain — */
+/* — the light: ground, golden window light, velvet edges, film grain — */
 .atmosphere {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background: var(--ground);
@@ -220,76 +222,103 @@ strong { font-weight: 600; }
 @keyframes cue { 0% { transform: scaleY(0); opacity: 1; } 70% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
 .cue:hover { color: var(--ink); }
 
-/* — contents: the diary's first page — */
-.contents { padding: 12vh var(--gutter) 10vh; display: grid; justify-items: center; }
-.contents-inner { width: min(780px, 100%); }
-.contents-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--hair-strong); padding-bottom: 14px; }
-.contents-hint { font-size: 15px; font-style: italic; color: var(--muted); }
-.contents ol { counter-reset: none; }
-.contents li a {
-  display: grid; grid-template-columns: 3.2em auto 1fr auto; align-items: baseline; gap: 14px;
-  padding: 18px 0; border-bottom: 1px solid var(--hair); text-decoration: none;
-  transition: padding 0.5s var(--ease-out), color 0.3s;
+/* — the work: all six in one place, right under the opening — */
+.work { padding: 10vh var(--gutter) 8vh; display: grid; justify-items: center; }
+.work-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--hair-strong); padding-bottom: 14px; margin-bottom: clamp(28px, 4vw, 48px);
 }
-.c-num { font-size: 13px; letter-spacing: 0.18em; color: var(--muted); }
-.c-title { font-size: clamp(22px, 2.6vw, 32px); font-style: italic; font-weight: 300; line-height: 1.2; }
-.c-leader { border-bottom: 1px dotted var(--hair-strong); transform: translateY(-0.3em); min-width: 24px; }
-.c-proj { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.contents li a:hover { padding-left: 12px; }
-.contents li a:hover .c-title { color: var(--wc, var(--accent)); }
-.contents li a:hover .c-proj { color: var(--ink); }
-.contents [data-world] { --wc: var(--accent); }
+.work-lead { margin: 0; font-size: clamp(22px, 2.4vw, 32px); font-weight: 300; font-style: italic; line-height: 1.2; }
+.work-lead em { color: var(--accent); }
+.index {
+  width: 100%;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 72px) var(--col-gap);
+}
+.index-item > a { display: grid; gap: 6px; text-decoration: none; color: var(--ink); }
+/* The cover is a lid on a box; pointing at it opens it a crack, and the
+   project's own light shows underneath. */
+.index-cover {
+  position: relative; display: block; aspect-ratio: 4 / 3; margin-bottom: 14px;
+  perspective: 1400px; border-radius: 10px;
+  background: radial-gradient(70% 60% at 50% 100%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 75%), var(--deep);
+}
+.index-lid {
+  position: absolute; inset: 0; border-radius: inherit; overflow: hidden; background: var(--deep);
+  transform-origin: 50% 0; transition: transform 0.9s var(--ease-lid), box-shadow 0.9s var(--ease-lid);
+  box-shadow: 0 34px 60px -34px rgb(0 0 0 / 0.85), 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+.index-lid img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); }
+.index-lid::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(165deg, rgb(255 255 255 / 0.12), transparent 38%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+}
+.index-lid .lid-art { gap: 6px; padding: 12px; }
+.index-lid .lid-art-title { font-size: clamp(18px, 2.1vw, 30px); }
+.index-item > a:hover .index-lid, .index-item > a:focus-visible .index-lid {
+  transform: rotateX(18deg); box-shadow: 0 40px 50px -30px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.index-line { display: flex; gap: 12px; align-items: baseline; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.index-num { color: var(--accent); min-width: 2.2em; }
+.index-title { font-size: clamp(30px, 3vw, 46px); line-height: 1; margin-top: 4px; transition: color 0.3s; }
+.index-item[data-world="mof"] .index-title { font-size: clamp(32px, 3.3vw, 50px); }
+.index-quote { font-size: 17px; font-style: italic; font-weight: 300; color: var(--muted); transition: color 0.3s; }
+.index-item > a:hover .index-title { color: var(--accent); }
+.index-item > a:hover .index-quote { color: var(--ink); }
+.index-item > a:focus-visible { outline-offset: 10px; }
+.work-cue { margin-top: clamp(56px, 9vh, 104px); text-align: center; }
 
-/* — rooms — */
-.room {
+/* — the story: each project, one at a time — */
+.chapter {
   position: relative;
   padding: 16vh var(--gutter) 12vh;
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: clamp(28px, 4vw, 48px);
   align-items: start;
   scroll-margin-top: 0;
 }
-.room-head {
+.chapter-head {
   grid-column: 1 / -1;
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: baseline;
   border-top: 1px solid var(--hair); padding-top: 20px;
 }
-.room-num { grid-column: 1 / 3; color: var(--accent); }
-.room-chapter {
+.chapter-num { grid-column: 1 / 3; color: var(--accent); }
+.chapter-name {
   grid-column: 3 / 13;
   font-size: clamp(32px, 4.2vw, 64px); font-style: italic; font-weight: 300; line-height: 1.04; letter-spacing: -0.02em;
 }
 
-.room .box { grid-column: 1 / 8; grid-row: 2 / span 2; }
-.room .room-card { grid-column: 9 / 13; grid-row: 2; }
-.room .note { grid-column: 9 / 13; grid-row: 3; }
+.chapter .box { grid-column: 1 / 8; grid-row: 2 / span 2; }
+.chapter .chapter-card { grid-column: 9 / 13; grid-row: 2; }
+.chapter .note { grid-column: 9 / 13; grid-row: 3; }
 
-.room--right .box { grid-column: 6 / 13; }
-.room--right .room-card { grid-column: 1 / 5; }
-.room--right .note { grid-column: 1 / 5; }
+.chapter--right .box { grid-column: 6 / 13; }
+.chapter--right .chapter-card { grid-column: 1 / 5; }
+.chapter--right .note { grid-column: 1 / 5; }
 
-.room--wide .box { grid-column: 2 / 12; grid-row: 2; aspect-ratio: 16 / 9; }
-.room--wide .room-card { grid-column: 2 / 7; grid-row: 3; }
-.room--wide .note { grid-column: 8 / 12; grid-row: 3; margin-top: 12px; }
+.chapter--wide .box { grid-column: 2 / 12; grid-row: 2; aspect-ratio: 16 / 9; }
+.chapter--wide .chapter-card { grid-column: 2 / 7; grid-row: 3; }
+.chapter--wide .note { grid-column: 8 / 12; grid-row: 3; margin-top: 12px; }
 
-/* Each room's own texture, faint and fading at the edges */
-.room::before {
+/* Each project's own texture, faint and fading at the edges */
+.chapter::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.9;
   -webkit-mask-image: radial-gradient(75% 60% at 70% 45%, #000, transparent 75%);
   mask-image: radial-gradient(75% 60% at 70% 45%, #000, transparent 75%);
 }
-.room--right::before { -webkit-mask-image: radial-gradient(75% 60% at 30% 45%, #000, transparent 75%); mask-image: radial-gradient(75% 60% at 30% 45%, #000, transparent 75%); }
+.chapter--right::before { -webkit-mask-image: radial-gradient(75% 60% at 30% 45%, #000, transparent 75%); mask-image: radial-gradient(75% 60% at 30% 45%, #000, transparent 75%); }
 /* threads, woven */
-.room[data-world="mof"]::before {
+.chapter[data-world="mof"]::before {
   background:
     repeating-linear-gradient(45deg, color-mix(in srgb, var(--accent) 7%, transparent) 0 1px, transparent 1px 16px),
     repeating-linear-gradient(-45deg, color-mix(in srgb, var(--accent) 7%, transparent) 0 1px, transparent 1px 16px);
 }
 /* slate and still water */
-.room[data-world="reset"]::before {
+.chapter[data-world="reset"]::before {
   background: repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 8%, transparent) 0 1px, transparent 1px 26px);
 }
 /* strawberry and matcha, soft */
-.room[data-world="yoca"]::before {
+.chapter[data-world="yoca"]::before {
   background:
     radial-gradient(28% 24% at 84% 22%, rgb(230 163 169 / 0.16), transparent 70%),
     radial-gradient(24% 22% at 12% 78%, rgb(159 181 127 / 0.13), transparent 70%),
@@ -297,13 +326,13 @@ strong { font-weight: 600; }
   -webkit-mask-image: none; mask-image: none;
 }
 /* a street grid */
-.room[data-world="ithacard"]::before {
+.chapter[data-world="ithacard"]::before {
   background:
     linear-gradient(rgb(47 138 133 / 0.09) 1px, transparent 1px) 0 0 / 56px 56px,
     linear-gradient(90deg, rgb(47 138 133 / 0.09) 1px, transparent 1px) 0 0 / 56px 56px;
 }
 /* light through leaves */
-.room[data-world="botanic"]::before {
+.chapter[data-world="botanic"]::before {
   background:
     radial-gradient(9% 7% at 22% 30%, rgb(201 154 88 / 0.13), transparent 70%),
     radial-gradient(7% 6% at 34% 58%, rgb(127 154 106 / 0.16), transparent 70%),
@@ -312,7 +341,7 @@ strong { font-weight: 600; }
     radial-gradient(8% 7% at 26% 88%, rgb(127 154 106 / 0.12), transparent 70%);
 }
 /* gold in the cracks */
-.room[data-world="kintsu"]::before {
+.chapter[data-world="kintsu"]::before {
   background: url("../assets/kintsu-cracks.svg") 100% 30% / 1100px auto no-repeat;
   opacity: 0.16;
 }
@@ -381,13 +410,13 @@ strong { font-weight: 600; }
   text-shadow: 0 2px 24px rgb(0 0 0 / 0.5);
 }
 
-.room-card { padding-top: 6px; }
-.room-kind { color: var(--muted); }
-.room-title { font-size: var(--title-size); line-height: 0.92; margin: 16px 0 20px; }
-.room-title a { text-decoration: none; }
-.room-quote { font-size: clamp(21px, 1.9vw, 27px); line-height: 1.3; font-style: italic; font-weight: 300; color: var(--accent); margin-bottom: 18px; }
-.room-desc { font-size: 17px; line-height: 1.6; color: var(--muted); max-width: 42ch; margin-bottom: 22px; }
-.room-card .pills { margin-bottom: 30px; }
+.chapter-card { padding-top: 6px; }
+.chapter-kind { color: var(--muted); }
+.chapter-title { font-size: var(--title-size); line-height: 0.92; margin: 16px 0 20px; }
+.chapter-title a { text-decoration: none; }
+.chapter-quote { font-size: clamp(21px, 1.9vw, 27px); line-height: 1.3; font-style: italic; font-weight: 300; color: var(--accent); margin-bottom: 18px; }
+.chapter-desc { font-size: 17px; line-height: 1.6; color: var(--muted); max-width: 42ch; margin-bottom: 22px; }
+.chapter-card .pills { margin-bottom: 30px; }
 
 .enter {
   display: inline-flex; align-items: baseline; gap: 12px;
@@ -416,8 +445,8 @@ strong { font-weight: 600; }
   font-style: normal; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500;
   color: var(--oxblood); line-height: 30px; margin: 0;
 }
-.room--right .note { --tilt: 1.2deg; }
-.room--wide .note { --tilt: -0.8deg; }
+.chapter--right .note { --tilt: 1.2deg; }
+.chapter--wide .note { --tilt: -0.8deg; }
 
 /* — epilogue — */
 .epilogue {
@@ -443,18 +472,18 @@ strong { font-weight: 600; }
 .ps-links a { color: var(--muted); text-decoration: none; font-style: italic; }
 .ps-links a:hover { color: var(--ink); }
 
-/* — the signature that gathers as you walk through the rooms — */
+/* — which chapter you're in, beside her M, while you read the story — */
 .dock {
   position: absolute; left: 50%; top: 10px;
   display: flex; align-items: center; gap: 12px;
-  padding: 4px 18px 4px 6px; border-radius: 999px;
+  padding: 4px 18px 4px 8px; border-radius: 999px;
   background: color-mix(in srgb, var(--ground) 70%, transparent);
   box-shadow: inset 0 0 0 1px var(--hair);
   opacity: 0; translate: -50% -8px; pointer-events: none;
   transition: opacity 0.6s var(--ease-out), translate 0.6s var(--ease-out);
 }
 .dock.is-on { opacity: 1; translate: -50% 0; }
-.dock .mila { width: 90px; aspect-ratio: 1680 / 775; }
+.dock .mila { width: 30px; margin: 2px 0 2px 8px; }
 .dock-text { display: flex; flex-direction: column; line-height: 1.25; }
 .dock-num { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
 .dock-chapter { font-size: 14px; font-style: italic; color: var(--ink); white-space: nowrap; }
@@ -497,7 +526,7 @@ strong { font-weight: 600; }
 .contact-lead { max-width: 40ch; font-size: clamp(18px, 1.8vw, 21px); color: var(--muted); }
 .contact-page .mila { width: min(220px, 50vw); margin: 36px auto 0; }
 
-/* — case studies: entering a room — */
+/* — case studies — */
 .case-hero {
   padding: 150px var(--gutter) 0;
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: 24px;
@@ -573,12 +602,13 @@ strong { font-weight: 600; }
 @media (max-width: 960px) {
   .prologue-title { grid-column: 1 / -1; }
   .prologue-note { grid-column: 1 / -1; max-width: 46ch; margin-top: 28px; }
-  .room, .room-head, .case-hero, .case-section { grid-template-columns: minmax(0, 1fr); }
-  .room > *, .room--right > *, .room--wide > *, .room-head > *, .case-hero > *, .case-section > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
-  .room { padding-top: 12vh; padding-bottom: 8vh; }
-  .room-head { row-gap: 8px; }
-  .room--wide .box { aspect-ratio: 4 / 3; }
+  .chapter, .chapter-head, .case-hero, .case-section { grid-template-columns: minmax(0, 1fr); }
+  .chapter > *, .chapter--right > *, .chapter--wide > *, .chapter-head > *, .case-hero > *, .case-section > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
+  .chapter { padding-top: 12vh; padding-bottom: 8vh; }
+  .chapter-head { row-gap: 8px; }
+  .chapter--wide .box { aspect-ratio: 4 / 3; }
   .note { max-width: 520px; }
+  .index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .case-hero .note { margin-top: 20px; }
   .case-cover { aspect-ratio: 4 / 3; }
   .case-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -594,13 +624,19 @@ strong { font-weight: 600; }
   .topnav .hide-sm { display: none; }
   .prologue { padding-top: 104px; }
   .mila--hero { margin: 24px -8px 20px; width: calc(100% + 16px); }
-  .contents li a { grid-template-columns: 2.4em 1fr; row-gap: 2px; }
-  .c-leader { display: none; }
-  .c-proj { grid-column: 2; }
+  .work-head { margin-bottom: 24px; }
+  .index { column-gap: 14px; row-gap: 34px; }
+  .index-cover { margin-bottom: 8px; border-radius: 8px; }
+  .index-line { font-size: 10px; letter-spacing: 0.16em; gap: 8px; }
+  .index-kind { display: none; }
+  .index-title { font-size: 26px; }
+  .index-item[data-world="mof"] .index-title { font-size: 28px; }
+  .index-item[data-world="botanic"] .index-title { font-size: 23px; }
+  .index-quote { font-size: 15px; line-height: 1.4; }
   .dock { left: calc(var(--gutter) - 6px); top: 8px; translate: 0 -8px; padding-right: 14px; }
   .dock.is-on { translate: 0 0; }
   .topbar.is-docked .brand { opacity: 0; }
-  .dock .mila { width: 70px; }
+  .dock .mila { width: 26px; }
   .dock-chapter { display: none; }
   .case-meta { grid-template-columns: minmax(0, 1fr); }
   .case-meta div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--hair); }
@@ -609,239 +645,16 @@ strong { font-weight: 600; }
   .footer { font-size: 13px; }
 }
 
-/* — directions —
-   Three ways the survey could go, switched by data-direction on <html>
-   (js/directions.js). Velvet is everything above. Notebook and Stone
-   restyle it on light grounds. Once Mila picks one, keep only its rules. */
-
-/* Shared by the two light directions */
-:is([data-direction="notebook"], [data-direction="stone"]) .topbar::before {
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--ground) 96%, transparent) 0%, color-mix(in srgb, var(--ground) 84%, transparent) 55%, transparent 100%);
-}
-:is([data-direction="notebook"], [data-direction="stone"]) .grain { filter: invert(1); mix-blend-mode: multiply; }
-:is([data-direction="notebook"], [data-direction="stone"]) .mila-stage { mix-blend-mode: multiply; }
-:is([data-direction="notebook"], [data-direction="stone"]) .kit {
-  background:
-    radial-gradient(110% 80% at 20% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 65%),
-    color-mix(in srgb, var(--ground) 55%, #fffdf8);
-  box-shadow: inset 0 0 0 1px var(--hair);
-}
-:is([data-direction="notebook"], [data-direction="stone"]) .lid { box-shadow: 0 34px 60px -36px rgb(60 42 30 / 0.55), 0 0 0 1px rgb(58 43 37 / 0.08); }
-:is([data-direction="notebook"], [data-direction="stone"]) .box:hover .lid,
-:is([data-direction="notebook"], [data-direction="stone"]) .box:focus-visible .lid,
-:is([data-direction="notebook"], [data-direction="stone"]) .box.is-open .lid { box-shadow: 0 8px 20px -10px rgb(60 42 30 / 0.4); }
-:is([data-direction="notebook"], [data-direction="stone"]) .lid::after { background: linear-gradient(165deg, rgb(255 255 255 / 0.16), transparent 38%); box-shadow: none; }
-:is([data-direction="notebook"], [data-direction="stone"]) .note { box-shadow: 0 24px 40px -28px rgb(60 42 30 / 0.5); }
-:is([data-direction="notebook"], [data-direction="stone"]) .letter { box-shadow: 0 40px 70px -40px rgb(60 42 30 / 0.5), 0 0 0 1px rgb(58 43 37 / 0.06); }
-:is([data-direction="notebook"], [data-direction="stone"]) .case-cover { box-shadow: 0 40px 80px -50px rgb(60 42 30 / 0.6); }
-
-/* — Notebook: a personal diary. Cream paper, ruled lines, photos taped onto
-   the page, notes in the margin, graphite handwriting. — */
-:root[data-direction="notebook"] {
-  --ink: #33261f; --muted: #75655a;
-  --hair: rgb(58 43 37 / 0.14); --hair-strong: rgb(58 43 37 / 0.26);
-  --r: 3px;
-}
-[data-direction="notebook"][data-world="home"], [data-direction="notebook"] [data-world="home"] {
-  --ground: #f0e8dd; --deep: #ddd0bd; --accent: #5e2a30; --glow: rgb(255 238 205 / 0.7); --tint: #d8c7ad;
-}
-[data-direction="notebook"][data-world="mof"], [data-direction="notebook"] [data-world="mof"] {
-  --ground: #ebe6dd; --deep: #d4cdc0; --accent: #3f5770; --glow: rgb(255 242 220 / 0.7); --tint: #b9c5d0;
-}
-[data-direction="notebook"][data-world="reset"], [data-direction="notebook"] [data-world="reset"] {
-  --ground: #e9e7e0; --deep: #d3d1c7; --accent: #56645a; --glow: rgb(250 246 236 / 0.7); --tint: #c3cbc6;
-}
-[data-direction="notebook"][data-world="yoca"], [data-direction="notebook"] [data-world="yoca"] {
-  --ground: #f3e7de; --deep: #e3cfc1; --accent: #a8502b; --glow: rgb(255 226 222 / 0.7); --tint: #ecc3c0;
-}
-[data-direction="notebook"][data-world="ithacard"], [data-direction="notebook"] [data-world="ithacard"] {
-  --ground: #eee6da; --deep: #d9ccb9; --accent: #1f6a66; --glow: rgb(255 240 214 / 0.7); --tint: #b6d2cf;
-}
-[data-direction="notebook"][data-world="botanic"], [data-direction="notebook"] [data-world="botanic"] {
-  --ground: #eae8da; --deep: #d3d1bc; --accent: #4c6639; --glow: rgb(250 244 214 / 0.7); --tint: #c7d3b6;
-}
-[data-direction="notebook"][data-world="kintsu"], [data-direction="notebook"] [data-world="kintsu"] {
-  --ground: #f1e9dd; --deep: #ddcfb9; --accent: #8e6a1c; --glow: rgb(255 236 196 / 0.7); --tint: #e2cc9c;
-}
-[data-direction="notebook"] .grain { opacity: 0.085; }
-[data-direction="notebook"] .atmosphere::after { opacity: 0.4; }
-/* the page is ruled, with a margin line down the left */
-[data-direction="notebook"] main {
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgb(58 43 37 / 0.06) 35px, rgb(58 43 37 / 0.06) 36px);
-}
-[data-direction="notebook"] body::before {
-  content: ""; position: fixed; top: 0; bottom: 0; left: max(8px, calc(var(--gutter) - 22px)); width: 1px; z-index: 1;
-  background: rgb(94 42 48 / 0.32); pointer-events: none;
-}
-/* covers are photos with a paper border, taped at the top; the lid lifts from the tape */
-[data-direction="notebook"] .box { rotate: -0.8deg; }
-[data-direction="notebook"] .room--right .box { rotate: 0.7deg; }
-[data-direction="notebook"] .room--wide .box { rotate: -0.35deg; }
-[data-direction="notebook"] .lid { border: 9px solid #fbf8f2; }
-[data-direction="notebook"] .box::after {
-  content: ""; position: absolute; z-index: 3; top: -15px; left: 50%; width: 136px; height: 32px;
-  translate: -50% 0; rotate: -2.5deg; pointer-events: none;
-  background: rgb(232 221 196 / 0.82);
-  box-shadow: 0 1px 2px rgb(60 42 30 / 0.16);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4px, #000 calc(100% - 4px), transparent);
-  mask-image: linear-gradient(90deg, transparent 0, #000 4px, #000 calc(100% - 4px), transparent);
-}
-[data-direction="notebook"] .kit {
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 29px, rgb(58 43 37 / 0.08) 29px, rgb(58 43 37 / 0.08) 30px);
-  background-color: #f8f3ea;
-}
-[data-direction="notebook"] .room-head { border-top-style: dashed; }
-[data-direction="notebook"] .note { background-color: #e8dcc6; }
-[data-direction="notebook"] .letter { background: #fbf8f2; }
-[data-direction="notebook"] .case-cover { border: 10px solid #fbf8f2; rotate: -0.3deg; }
-
-/* — Stone: a slow stay at a Mediterranean hotel. Warm limestone, arched
-   doorways, shutter shadows, a card left on the pillow. — */
-:root[data-direction="stone"] {
-  --ink: #2f241e; --muted: #7a6858;
-  --hair: rgb(47 36 30 / 0.13); --hair-strong: rgb(47 36 30 / 0.24);
-  --font-label: 'Jost', 'Helvetica Neue', Arial, sans-serif;
-  --r: 10px;
-  --arch: 50% 50% 10px 10px / 34% 34% 10px 10px;
-}
-[data-direction="stone"][data-world="home"], [data-direction="stone"] [data-world="home"] {
-  --ground: #e8dfd2; --deep: #d3c6b2; --accent: #96643f; --glow: rgb(255 236 204 / 0.75); --tint: #d5c3a7;
-}
-[data-direction="stone"][data-world="mof"], [data-direction="stone"] [data-world="mof"] {
-  --ground: #e6e0d5; --deep: #cfc7b8; --accent: #46607a; --glow: rgb(255 238 210 / 0.75); --tint: #b7c6d2;
-}
-[data-direction="stone"][data-world="reset"], [data-direction="stone"] [data-world="reset"] {
-  --ground: #e4e1da; --deep: #ccc8be; --accent: #59685d; --glow: rgb(252 246 232 / 0.7); --tint: #c0c9c4;
-}
-[data-direction="stone"][data-world="yoca"], [data-direction="stone"] [data-world="yoca"] {
-  --ground: #ece0d5; --deep: #d8c5b3; --accent: #ad5733; --glow: rgb(255 228 216 / 0.75); --tint: #e7bfb8;
-}
-[data-direction="stone"][data-world="ithacard"], [data-direction="stone"] [data-world="ithacard"] {
-  --ground: #e7dfd3; --deep: #d0c3b0; --accent: #246d69; --glow: rgb(255 238 210 / 0.75); --tint: #b3cfcb;
-}
-[data-direction="stone"][data-world="botanic"], [data-direction="stone"] [data-world="botanic"] {
-  --ground: #e3e1d3; --deep: #cbc9b2; --accent: #566f43; --glow: rgb(252 244 214 / 0.75); --tint: #c3cfb0;
-}
-[data-direction="stone"][data-world="kintsu"], [data-direction="stone"] [data-world="kintsu"] {
-  --ground: #e9e0d3; --deep: #d2c3ad; --accent: #976f1f; --glow: rgb(255 234 194 / 0.75); --tint: #dcc594;
-}
-[data-direction="stone"] .grain { opacity: 0.045; }
-/* sunlight through louvered shutters, drifting slowly */
-[data-direction="stone"] .atmosphere::after {
-  top: -20%; left: 30%; width: 95%; height: 140%;
-  background: repeating-linear-gradient(100deg, transparent 0, transparent 46px, rgb(96 70 46 / 0.075) 46px, rgb(96 70 46 / 0.075) 76px);
-  filter: blur(7px); opacity: 1; transform: rotate(-8deg) skewX(-10deg);
-  -webkit-mask-image: radial-gradient(55% 50% at 62% 34%, #000, transparent 75%);
-  mask-image: radial-gradient(55% 50% at 62% 34%, #000, transparent 75%);
-  animation: shutters 24s ease-in-out infinite alternate;
-}
-@keyframes shutters { from { translate: 0 0; } to { translate: -4% 1.5%; } }
-[data-direction="stone"] .label,
-[data-direction="stone"] .c-num, [data-direction="stone"] .c-proj, [data-direction="stone"] .dock-num,
-[data-direction="stone"] .note-label, [data-direction="stone"] .letter h2,
-[data-direction="stone"] .case-meta dt, [data-direction="stone"] .step-num { font-weight: 400; letter-spacing: 0.3em; }
-[data-direction="stone"] .brand { font-weight: 400; letter-spacing: 0.4em; }
-/* arrival: everything on the center line */
-[data-direction="stone"] .prologue-title { text-align: center; justify-self: center; }
-[data-direction="stone"] .prologue-note { text-align: center; margin-top: 32px; justify-self: center; }
-@media (min-width: 961px) {
-  [data-direction="stone"] .prologue-title { grid-column: 2 / 12; }
-  [data-direction="stone"] .prologue-note { grid-column: 4 / 10; }
-}
-[data-direction="stone"] .room-head { display: block; text-align: center; border-top: 0; padding-top: 0; }
-[data-direction="stone"] .room-num { margin-bottom: 14px; }
-[data-direction="stone"] .room-chapter { font-style: normal; font-weight: 300; }
-/* each room is entered through an arched doorway */
-[data-direction="stone"] .room .box { grid-column: 3 / 11; grid-row: 2; aspect-ratio: 16 / 10; }
-[data-direction="stone"] .room .room-card { grid-column: 3 / 7; grid-row: 3; }
-[data-direction="stone"] .room .note { grid-column: 8 / 11; grid-row: 3; }
-[data-direction="stone"] .box,
-[data-direction="stone"] .box .lid,
-[data-direction="stone"] .box .kit { border-radius: var(--arch); }
-[data-direction="stone"] .kit { padding: 17% 11% 8%; align-items: center; text-align: center; }
-[data-direction="stone"] .kit-top { justify-content: center; margin-bottom: auto; }
-[data-direction="stone"] .kit-arrow { display: none; }
-[data-direction="stone"] .kit .swatches { width: 100%; }
-[data-direction="stone"] .kit .lines { align-items: center; }
-/* the note is a card left on the pillow */
-[data-direction="stone"] .note, [data-direction="stone"] .note:hover {
-  rotate: 0deg; background-image: none; background-color: #fbf8f3;
-  padding: 30px 30px 32px; text-align: center; border-radius: 2px;
-  line-height: 1.7; font-size: 17px;
-  box-shadow: inset 0 0 0 7px #fbf8f3, inset 0 0 0 8px color-mix(in srgb, var(--accent) 45%, transparent), 0 24px 40px -28px rgb(60 42 30 / 0.45);
-}
-[data-direction="stone"] .note-label { color: var(--accent); line-height: 1.4; margin-bottom: 14px; }
-[data-direction="stone"] .letter { background: #fbf8f3; }
-[data-direction="stone"] .case-cover {
-  aspect-ratio: 4 / 3; width: min(1000px, calc(100% - 2 * var(--gutter)));
-  margin-left: auto; margin-right: auto; border-radius: var(--arch);
-}
-[data-direction="stone"] .case-hero > .label, [data-direction="stone"] .case-section > .label { letter-spacing: 0.3em; }
-
-/* — the switcher — */
-.directions {
-  position: fixed; right: var(--gutter); bottom: 20px; z-index: 50;
-  display: grid; justify-items: end; gap: 10px;
-  font-family: var(--font-voice);
-}
-.directions-bar {
-  display: flex; align-items: center; gap: 2px; padding: 5px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--ground) 84%, transparent);
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  box-shadow: inset 0 0 0 1px var(--hair-strong), 0 18px 40px -22px rgb(0 0 0 / 0.55);
-}
-.directions-label {
-  font-family: var(--font-label); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--muted); padding: 0 10px 0 12px; white-space: nowrap;
-}
-.directions button {
-  appearance: none; border: 0; margin: 0; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 14px 8px 9px; border-radius: 999px;
-  background: transparent; color: var(--muted);
-  font: italic 15px/1 var(--font-voice);
-  transition: background-color 0.3s, color 0.3s;
-}
-.directions button:hover { color: var(--ink); }
-.directions button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
-.directions-swatch {
-  width: 14px; height: 14px; border-radius: 50%; flex: none;
-  background: linear-gradient(135deg, var(--a) 50%, var(--b) 50%);
-  box-shadow: 0 0 0 1px rgb(128 116 104 / 0.55);
-}
-.directions-note {
-  max-width: 330px; margin: 0; padding: 14px 18px;
-  border-radius: 14px; font-size: 15px; line-height: 1.5; color: var(--ink);
-  background: color-mix(in srgb, var(--ground) 92%, transparent);
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  box-shadow: inset 0 0 0 1px var(--hair-strong), 0 18px 40px -22px rgb(0 0 0 / 0.55);
-  opacity: 0; translate: 0 8px; pointer-events: none;
-  transition: opacity 0.4s var(--ease-out), translate 0.5s var(--ease-out);
-}
-.directions-note strong { font-weight: 600; font-style: italic; }
-.directions-from { display: block; margin-top: 8px; font-size: 13px; color: var(--muted); font-style: italic; }
-.directions.show-note .directions-note,
-.directions:hover .directions-note,
-.directions:focus-within .directions-note { opacity: 1; translate: 0 0; }
-@media (max-width: 600px) {
-  .directions { left: 10px; right: 10px; bottom: 10px; justify-items: center; }
-  .directions-label { display: none; }
-  .directions button { padding: 8px 12px 8px 8px; font-size: 14px; }
-  .directions-note { max-width: none; }
-}
-
 /* — less motion — */
 @media (prefers-reduced-motion: reduce) {
   :root { transition: none; }
-  .grain, .atmosphere::after, .cue-line,
-  [data-direction] .grain, [data-direction] .atmosphere::after { animation: none; }
-  .directions-note, .directions button { transition: none; }
+  .grain, .atmosphere::after, .cue-line { animation: none; }
   .js [data-reveal] { opacity: 1; translate: none; transition: none; }
   .lid { transition: opacity 0.3s ease; }
   .box:hover .lid, .box:focus-visible .lid, .box.is-open .lid { transform: none; opacity: 0; }
   .kit > * { transition: opacity 0.3s ease; translate: none; }
-  .note, .enter span, .contents li a { transition: none; }
+  .note, .enter span, .index-lid { transition: none; }
+  .index-item > a:hover .index-lid, .index-item > a:focus-visible .index-lid { transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }

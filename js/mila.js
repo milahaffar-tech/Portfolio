@@ -5,16 +5,15 @@
 //   spread  how far apart the separate letters sit (1 is the drawing's own spacing)
 //   p       the joining gesture: 0 is four letters, 1 is the signature. The
 //           letters travel, the inks turn to one color, and the i is dotted last.
-// The story page uses spread while the visitor walks through the rooms, and p
-// once, at the end.
+// The homepage plays p from 0 to 1 when the page opens, and again at the end.
 //
 // The geometry is cut from Mila's drawing (assets/handwriting/p_*.png) and
 // was ported from the Claude Design file (mila.jsx, animations-v3.jsx).
 //
-// Usage: Mila.create(element, { tone, crop }) returns { set }. Without a
-// tone, the ink follows the site's direction (js/directions.js) and
-// Mila.retone() repaints every such signature after a switch.
-// Elements with data-mila="static" are drawn joined on load, with no motion.
+// Usage: Mila.create(element, { tone, crop, float }) returns { set }. tone is
+// "dark" (colored inks on the velvet ground, the default) or "light" (deeper
+// inks for paper). Elements with data-mila="static" are drawn joined on load,
+// with no motion.
 (() => {
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const IMG_DIR = new URL('../assets/handwriting/', document.currentScript.src).href;
@@ -30,12 +29,7 @@
   const INKS = {
     dark: { M: '#8fa4d2', I: '#8db79c', L: '#d9907e', A: '#b59bd2', end: '#f0e8dd' },
     light: { M: '#1f3a8a', I: '#14532d', L: '#991b1b', A: '#581c87', end: '#2a201c' },
-    stone: { M: '#4d6680', I: '#5d7748', L: '#a5532f', A: '#7b4a63', end: '#3a2b25' },
   };
-  // The ink each site direction uses.
-  const DIRECTION_TONE = { velvet: 'dark', notebook: 'light', stone: 'stone' };
-  const pageTone = () => DIRECTION_TONE[document.documentElement.dataset.direction] || 'dark';
-  const instances = [];
   // When each letter travels, as a share of p (the original timeline). Then
   // the extra strokes fade, the inks unify, and the dot lands last.
   const WINDOWS = { M: [0.04, 0.6, 'move'], I: [0.04, 0.6, 'move'], L: [0.08, 0.64, 'move'], A: [0.12, 0.74, 'smooth'] };
@@ -96,8 +90,7 @@
   };
 
   function create(root, { tone, crop = 'apart', float = 0 } = {}) {
-    // An explicit tone stays put; otherwise the ink follows the direction.
-    let inks = INKS[tone || pageTone()] || INKS.dark;
+    const inks = INKS[tone] || INKS.dark;
     const [CX, CY, CW, CH] = CROPS[crop] || CROPS.apart;
     root.style.aspectRatio = `${CW} / ${CH}`;
     const id = 'mila' + (++uid);
@@ -142,9 +135,7 @@
       return [dx, dy];
     };
 
-    let last = [0, {}];
     function set(p, opts = {}) {
-      last = [p, opts];
       p = cl(p);
       spread = opts.spread ?? 1;
       const time = opts.time ?? 0;
@@ -193,17 +184,10 @@
     }
 
     set(0);
-    if (!tone) {
-      instances.push(() => {
-        inks = INKS[pageTone()] || INKS.dark;
-        lastUnify = -1;
-        set(...last);
-      });
-    }
     return { set };
   }
 
-  window.Mila = { create, retone: () => instances.forEach((repaint) => repaint()) };
+  window.Mila = { create };
 
   // Static signatures (About, Contact): joined, no motion.
   document.querySelectorAll('[data-mila="static"]').forEach((node) => {

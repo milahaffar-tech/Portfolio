@@ -1,10 +1,12 @@
 // Shared by every page. Pieces fade in as they reach the screen.
 //
-// On the story page (index.html) it also does the rest: as each room reaches
-// the middle of the screen the light changes to that room's world, and on
-// touch screens its cover lifts. Mila's name follows along: four separate
-// letters in the prologue, drifting closer room by room in the top bar, and
-// joining into her signature in the epilogue.
+// On the homepage it also does the rest:
+// - Mila's handwritten letters gather into her M as soon as the page opens,
+//   so every visitor sees it, and gather once more at the end.
+// - Each project keeps its own light. The page's light shifts to it as its
+//   chapter reaches the middle of the screen, or while a cover in the grid
+//   is pointed at. Nothing names it; the color just changes.
+// - On touch screens a chapter's cover lifts as it passes.
 (() => {
   const root = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -25,20 +27,39 @@
   const topbar = document.querySelector('.topbar');
   const dockNum = dock && dock.querySelector('.dock-num');
   const dockChapter = dock && dock.querySelector('.dock-chapter');
-  const setWorld = (section) => {
-    root.dataset.world = section.dataset.world;
-    if (dock && section.dataset.num) {
-      dockNum.textContent = `Room ${section.dataset.num} of VI`;
-      dockChapter.textContent = section.dataset.chapter || '';
+  let scrollWorld = root.dataset.world;
+  let pointedWorld = null;
+  const paint = () => { root.dataset.world = pointedWorld || scrollWorld; };
+  const setSection = (section) => {
+    scrollWorld = section.dataset.world;
+    paint();
+    if (dock) {
+      const num = section.dataset.num;
+      if (num) {
+        dockNum.textContent = `${num} of VI`;
+        dockChapter.textContent = section.dataset.chapter || '';
+      }
+      dock.classList.toggle('is-on', Boolean(num));
+      if (topbar) topbar.classList.toggle('is-docked', Boolean(num));
     }
   };
   const worlds = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) setWorld(e.target);
+    for (const e of entries) if (e.isIntersecting) setSection(e.target);
   }, { rootMargin: '-50% 0px -50% 0px' });
   document.querySelectorAll('main > [data-world]').forEach((s) => worlds.observe(s));
 
-  // — touch screens have no hover, so a cover lifts as it passes the upper
-  // part of the screen (seen closed first, then opened) —
+  // Pointing at a project in the grid lends the page its light for a moment.
+  document.querySelectorAll('.index-item[data-world]').forEach((item) => {
+    const on = () => { pointedWorld = item.dataset.world; paint(); };
+    const off = () => { pointedWorld = null; paint(); };
+    item.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') on(); });
+    item.addEventListener('pointerleave', off);
+    item.addEventListener('focusin', on);
+    item.addEventListener('focusout', off);
+  });
+
+  // — touch screens have no hover, so a chapter's cover lifts as it passes
+  // the upper part of the screen (seen closed first, then opened) —
   if (window.matchMedia('(hover: none)').matches) {
     const lids = new IntersectionObserver((entries) => {
       for (const e of entries) e.target.classList.toggle('is-open', e.isIntersecting);
@@ -46,70 +67,38 @@
     document.querySelectorAll('.box').forEach((b) => lids.observe(b));
   }
 
-  // — the name —
+  // — the M —
   if (!window.Mila) return;
-  const heroEl = document.querySelector('[data-mila="hero"]');
-  const dockEl = document.querySelector('[data-mila="dock"]');
-  const finaleEl = document.querySelector('[data-mila="finale"]');
-  const firstRoom = document.querySelector('.room');
-  const epilogue = document.querySelector('.epilogue');
 
-  const hero = heroEl && Mila.create(heroEl, { crop: 'wide', float: reduce ? 0 : 16 });
-  const mini = dockEl && Mila.create(dockEl, { crop: 'wide' });
-  const finale = finaleEl && Mila.create(finaleEl, { crop: 'apart' });
-
-  // How far apart the letters sit: wide in the prologue, closer with each
-  // room, at their own spacing by the epilogue.
-  const HERO_SPREAD = [1.7, 1.55];
-  const ROOMS_SPREAD = [1.55, 1];
-
-  let heroSpread = HERO_SPREAD[0];
-  let heroVisible = true;
-  let raf = 0;
-
-  function update() {
-    raf = 0;
-    const vh = window.innerHeight;
-    const y = window.scrollY;
-
-    if (hero && heroEl) {
-      const h = heroEl.closest('section') || heroEl;
-      const t = clamp01(y / Math.max(1, h.offsetHeight));
-      heroSpread = HERO_SPREAD[0] + (HERO_SPREAD[1] - HERO_SPREAD[0]) * t;
-      if (reduce) hero.set(0, { spread: heroSpread });
-    }
-
-    if (mini && firstRoom && epilogue) {
-      const start = firstRoom.offsetTop, end = epilogue.offsetTop;
-      const mid = y + vh / 2;
-      const r = clamp01((mid - start) / Math.max(1, end - start));
-      mini.set(0, { spread: ROOMS_SPREAD[0] + (ROOMS_SPREAD[1] - ROOMS_SPREAD[0]) * r });
-      const on = mid > start && mid < end;
-      dock.classList.toggle('is-on', on);
-      if (topbar) topbar.classList.toggle('is-docked', on);
-    }
-
-    if (finale && finaleEl) {
-      const rect = finaleEl.getBoundingClientRect();
-      const f = reduce ? 1 : clamp01((vh * 0.92 - rect.top) / (vh * 0.55));
-      finale.set(f);
-    }
-  }
-  const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  update();
-
-  // The prologue letters drift a little on their own while they are on screen.
-  if (hero && !reduce) {
-    new IntersectionObserver(([e]) => {
-      heroVisible = e.isIntersecting;
-      if (heroVisible) requestAnimationFrame(float);
-    }).observe(heroEl);
-    const float = (time) => {
-      if (!heroVisible) return;
-      hero.set(0, { spread: heroSpread, time });
-      requestAnimationFrame(float);
+  // Plays the joining gesture once, when at least half of el is on screen.
+  // While the letters wait apart they drift a little on their own.
+  function gather(el, sign, { spread = 1, delay = 0, duration = 3000 } = {}) {
+    if (reduce) { sign.set(1); return; }
+    let visible = false, start = 0, running = false, done = false;
+    const frame = (now) => {
+      if (!visible && !start) { running = false; return; }
+      if (!start && now >= waitUntil) start = now;
+      const p = start ? clamp01((now - start) / duration) : 0;
+      sign.set(p, { spread, time: now });
+      if (p < 1) requestAnimationFrame(frame);
+      else { running = false; done = true; }
     };
+    let waitUntil = 0;
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (!visible || running || done) return;
+      waitUntil = performance.now() + delay;
+      running = true;
+      requestAnimationFrame(frame);
+    }, { threshold: 0.5 }).observe(el);
+    sign.set(0, { spread });
   }
+
+  const heroEl = document.querySelector('[data-mila="hero"]');
+  const finaleEl = document.querySelector('[data-mila="finale"]');
+
+  // At the top: four letters, a beat to see them apart, then her M.
+  if (heroEl) gather(heroEl, Mila.create(heroEl, { crop: 'wide', float: 16 }), { spread: 1.6, delay: 1100, duration: 3200 });
+  // At the end, for anyone who read every chapter: the same gesture again.
+  if (finaleEl) gather(finaleEl, Mila.create(finaleEl, { crop: 'apart', float: 10 }), { spread: 1.15, delay: 400, duration: 3000 });
 })();
