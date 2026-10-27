@@ -1,38 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-world="home">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mila Haffar — Contact</title>
 <meta name="description" content="Get in touch with Mila Haffar.">
+<meta name="theme-color" content="#241916">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;display=swap">
 <link rel="stylesheet" href="css/styles.css">
+<script src="js/mila.js" defer></script>
+<script src="js/site.js" defer></script>
 </head>
-<body>
+<body id="top">
+<a class="skip" href="#main">Skip to contact</a>
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<nav class="nav pad">
-  <a class="nav-brand" href="index.html">MILA HAFFAR</a>
-  <a href="index.html#work">Work</a>
-  <a href="contact.html" aria-current="page">Contact</a>
-  <a href="about.html">About</a>
-</nav>
+<header class="topbar">
+  <a class="brand" href="index.html">Mila Haffar</a>
+  <nav class="topnav" aria-label="Main">
+    <a class="hide-sm" href="index.html#work">Work</a>
+    <a href="about.html">My story</a>
+    <a href="contact.html" aria-current="page">Write to me</a>
+  </nav>
+</header>
 
-<main>
-  <section class="page contact-page pad">
-    <div class="eyebrow">Contact</div>
-    <h1 class="page-title">Say hello.</h1>
-    <p class="page-lead">For projects, internships, or a conversation about design and how people think, email is the fastest way to reach me.</p>
-  </section>
-  <section class="contact pad">
-    <div class="contact-links">
-      <a class="contact-email" href="mailto:hello@milahaffar.com">hello@milahaffar.com</a>
-      <a class="contact-social" href="https://linkedin.com">LinkedIn</a>
-    </div>
-  </section>
+<main id="main" class="contact-page">
+  <p class="label" data-reveal>Contact</p>
+  <h1 class="contact-title" data-reveal style="--d: 80ms">Say <em>hello.</em></h1>
+  <p class="contact-lead" data-reveal style="--d: 160ms">For projects, internships, or a conversation about design and how people think, email is the fastest way to reach me.</p>
+  <div data-reveal style="--d: 240ms">
+    <a class="ps-email" href="mailto:hello@milahaffar.com">hello@milahaffar.com</a>
+    <div class="ps-links"><a href="https://linkedin.com">LinkedIn</a><a href="about.html">Read my story</a></div>
+  </div>
+  <div class="mila" data-mila="static" role="img" aria-label="Mila's handwritten signature"></div>
 </main>
 
-<footer class="footer pad">
-  <span>Mila Haffar</span>
-  <span>Ithaca, NY</span>
+<footer class="footer">
+  <span>Mila Haffar · Ithaca, NY</span>
+  <a href="index.html">Back to the story</a>
 </footer>
 
 </body>

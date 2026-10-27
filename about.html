@@ -1,48 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-world="home">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mila Haffar — About</title>
+<title>Mila Haffar — My story</title>
 <meta name="description" content="Mila Haffar is a junior at Cornell University majoring in Cognitive Science with a minor in Design &amp; Environmental Analysis.">
+<meta name="theme-color" content="#241916">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;display=swap">
 <link rel="stylesheet" href="css/styles.css">
+<script src="js/mila.js" defer></script>
+<script src="js/site.js" defer></script>
 </head>
-<body>
+<body id="top">
+<a class="skip" href="#main">Skip to my story</a>
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<nav class="nav pad">
-  <a class="nav-brand" href="index.html">MILA HAFFAR</a>
-  <a href="index.html#work">Work</a>
-  <a href="contact.html">Contact</a>
-  <a href="about.html" aria-current="page">About</a>
-</nav>
+<header class="topbar">
+  <a class="brand" href="index.html">Mila Haffar</a>
+  <nav class="topnav" aria-label="Main">
+    <a class="hide-sm" href="index.html#work">Work</a>
+    <a href="about.html" aria-current="page">My story</a>
+    <a href="contact.html">Write to me</a>
+  </nav>
+</header>
 
-<main>
-  <section class="about page pad">
-    <div class="eyebrow">About</div>
+<main id="main" class="letter-wrap">
+  <article class="letter" data-reveal>
+    <p class="label">My story</p>
+    <h1>Hi, I'm Mila.</h1>
 
-    <div class="section-grid">
-      <div class="section-label">Me</div>
-      <div class="section-body">
-        <h1>Me</h1>
-        <p>I'm Mila Haffar, a junior at Cornell University majoring in Cognitive Science with a minor in Design &amp; Environmental Analysis. I'm drawn to the place where cognitive behavior and human-centered design overlap, and to making things that answer what people actually need.</p>
-      </div>
-    </div>
+    <h2>Me</h2>
+    <p class="lede">I'm Mila Haffar, a junior at Cornell University majoring in Cognitive Science with a minor in Design &amp; Environmental Analysis. I'm drawn to the place where cognitive behavior and human-centered design overlap, and to making things that answer what people actually need.</p>
 
-    <div class="section-grid">
-      <div class="section-label">My story</div>
-      <div class="section-body">
-        <h2>My story</h2>
-        <p>Since I was little I've looked at experiences through other people's eyes, imagining what they'd want, need, or feel. I filled notebooks with invented people, each with their own habits and problems, and designed the things their days were missing. I didn't know it then, but that was my first design thinking. A daydreaming habit turned into a real interest in human-centered design.</p>
-        <p>As I got older, the curiosity shifted toward understanding behavior itself, which is why I chose Cognitive Science. Through high school and my first two years of college I assumed neuropsychology was the path. I wanted to know why people think and act the way they do. Then I took a Design &amp; Innovation course at Cornell and saw that design let me use what I love about psychology: not only to study how people think, but to build systems and products that respond to it.</p>
-        <p>That felt like finding the missing link between creativity and logic. It lets me put analytical insight and artistic intuition in the same room, and turn empathy and perception into real things that make people's lives a little more beautiful.</p>
-      </div>
-    </div>
-  </section>
+    <h2>My story</h2>
+    <p>Since I was little I've looked at experiences through other people's eyes, imagining what they'd want, need, or feel. I filled notebooks with invented people, each with their own habits and problems, and designed the things their days were missing. I didn't know it then, but that was my first design thinking. A daydreaming habit turned into a real interest in human-centered design.</p>
+    <p>As I got older, the curiosity shifted toward understanding behavior itself, which is why I chose Cognitive Science. Through high school and my first two years of college I assumed neuropsychology was the path. I wanted to know why people think and act the way they do. Then I took a Design &amp; Innovation course at Cornell and saw that design let me use what I love about psychology: not only to study how people think, but to build systems and products that respond to it.</p>
+    <p>That felt like finding the missing link between creativity and logic. It lets me put analytical insight and artistic intuition in the same room, and turn empathy and perception into real things that make people's lives a little more beautiful.</p>
+
+    <div class="mila letter-sign" data-mila="static" data-tone="light" role="img" aria-label="Signed, Mila"></div>
+  </article>
+
+  <div class="letter-after" data-reveal>
+    <p class="label">What I work on</p>
+    <ul class="pills">
+      <li>Hospitality</li>
+      <li>Consumer psychology</li>
+      <li>Experience design</li>
+      <li>Brand strategy</li>
+      <li>AI tools</li>
+    </ul>
+    <p class="ps-links"><a href="index.html#work">See the work</a><a href="contact.html">Write to me</a></p>
+  </div>
 </main>
 
-<footer class="footer pad">
-  <span>Mila Haffar</span>
-  <span>Ithaca, NY</span>
+<footer class="footer">
+  <span>Mila Haffar · Ithaca, NY</span>
+  <a href="#top">Back to the top ↑</a>
 </footer>
 
 </body>
