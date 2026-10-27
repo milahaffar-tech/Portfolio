@@ -192,6 +192,8 @@ strong { font-weight: 600; }
   transition: color 0.3s, background-size 0.5s var(--ease-out);
 }
 .topnav a:hover, .topnav a[aria-current="page"] { color: var(--ink); background-size: 100% 1px; }
+.topnav a { white-space: nowrap; }
+.nav-short { display: none; }
 
 /* — prologue — */
 /* The homepage is this one screen: everything is sized to fit the window's height. */
@@ -409,6 +411,17 @@ strong { font-weight: 600; }
 .letter h2 { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; color: var(--oxblood); margin: 36px 0 12px; }
 .letter p { font-size: 19px; line-height: 1.75; }
 .letter .lede { font-size: clamp(21px, 2.2vw, 25px); line-height: 1.55; font-weight: 300; }
+/* her photo: a print set on the letter, held by a strip of tape */
+.letter-photo {
+  float: right; position: relative; width: clamp(140px, 30%, 230px); margin: -6px -4px 22px 28px;
+  padding: 9px; background: #fbf8f2; rotate: 2.2deg;
+  box-shadow: 0 18px 30px -18px rgb(60 42 30 / 0.55), 0 0 0 1px rgb(58 43 37 / 0.08);
+}
+.letter-photo img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.letter-photo::before {
+  content: ""; position: absolute; top: -12px; left: 50%; width: 92px; height: 24px; translate: -50% 0; rotate: -4deg;
+  background: rgb(232 221 196 / 0.85); box-shadow: 0 1px 2px rgb(60 42 30 / 0.15);
+}
 .letter-sign { width: 190px; margin: 34px 0 0 -12px; }
 .letter-sign + .label { margin-top: 2px; }
 .letter-after { width: min(780px, 100%); display: grid; gap: 22px; justify-items: start; }
@@ -453,10 +466,29 @@ strong { font-weight: 600; }
 
 .case-section {
   padding: clamp(56px, 9vw, 110px) var(--gutter) 0;
-  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr; column-gap: var(--col-gap);
 }
 .case-section > .label { grid-column: 1 / 4; color: var(--accent); padding-top: 8px; }
-.case-body { grid-column: 4 / 11; max-width: 66ch; }
+.case-body { grid-column: 4 / 11; grid-row: 1 / span 2; max-width: 66ch; }
+
+/* A drawing beside each part of a case study, in the project's own color. It
+   stays in view while a long section is read, and draws itself in like her
+   handwriting when it reaches the screen (js/site.js measures each line). */
+.case-illo {
+  grid-column: 1 / 4; grid-row: 2; align-self: start;
+  position: sticky; top: 120px;
+  width: min(100%, 220px); margin: 32px 0 0; color: var(--accent);
+}
+.case-illo svg { display: block; width: 100%; height: auto; overflow: visible; }
+.case-illo .wash { fill: currentColor; stroke: none; opacity: 0.09; }
+.case-illo .soft { fill: currentColor; fill-opacity: 0.14; }
+.case-illo .fill { fill: currentColor; stroke: none; }
+.case-illo .dots { stroke-dasharray: 1 7; }
+.case-illo .ink { transition: stroke-dashoffset 1.8s var(--ease-out), fill-opacity 1s ease 0.9s; }
+.case-illo :is(.wash, .fill, .dots) { transition: opacity 1s ease 0.9s; }
+.case-illo.is-drawing:not(.is-in) :is(.wash, .fill, .dots) { opacity: 0; }
+.case-illo.is-drawing:not(.is-in) .soft { fill-opacity: 0; }
+.case-illo.is-in .ink { stroke-dashoffset: 0 !important; }
 .case-body p, .case-body li { font-size: 19px; line-height: 1.7; }
 .case-lead { font-size: clamp(22px, 2.3vw, 29px) !important; line-height: 1.45 !important; font-weight: 300; margin-bottom: 28px; }
 .case-lead strong { font-weight: 500; }
@@ -500,7 +532,7 @@ strong { font-weight: 600; }
 @media (max-width: 960px) {
   .prologue-title { grid-column: 1 / -1; }
   .prologue-note { grid-column: 1 / -1; max-width: 46ch; margin-top: 28px; }
-  .case-hero, .case-section { grid-template-columns: minmax(0, 1fr); }
+  .case-hero, .case-section { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
   .case-hero > *, .case-section > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
   .note { max-width: 520px; }
   .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -510,12 +542,16 @@ strong { font-weight: 600; }
   .case-meta div:nth-child(3) { border-left: 0; padding-left: 0; }
   .case-meta div:nth-child(n + 3) { border-top: 1px solid var(--hair); }
   .case-section > .label { margin-bottom: 16px; }
+  .case-illo { position: static; width: 150px; margin: 0 0 24px; }
 }
 @media (max-width: 600px) {
   body { font-size: 18px; }
   .topbar { padding-top: 16px; }
   .brand { font-size: 11px; letter-spacing: 0.22em; }
+  .topnav { gap: 14px; }
   .topnav a { font-size: 15px; }
+  .nav-long { display: none; }
+  .nav-short { display: inline; }
   .prologue { padding-top: 92px; }
   .mila--hero { margin: 24px -8px 20px; width: calc(100% + 16px); }
   .work-page { padding-top: 112px; }
@@ -525,6 +561,16 @@ strong { font-weight: 600; }
   .case-foot { grid-template-columns: minmax(0, 1fr); }
   .case-foot a + a { border-left: 0; padding-left: 0; border-top: 1px solid var(--hair); text-align: left; justify-items: start; }
   .footer { font-size: 13px; }
+  .letter-photo { width: 118px; margin: -4px -6px 14px 16px; padding: 6px; }
+  .letter-photo::before { width: 64px; height: 18px; top: -9px; }
+}
+
+/* the narrowest phones: the menu still fits on one line */
+@media (max-width: 359px) {
+  .topbar { gap: 10px; }
+  .brand { font-size: 10px; letter-spacing: 0.14em; }
+  .topnav { gap: 10px; }
+  .topnav a { font-size: 14px; }
 }
 
 /* short phones: the opening still fits one screen */

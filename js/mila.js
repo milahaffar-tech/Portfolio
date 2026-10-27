@@ -5,7 +5,9 @@
 //   spread  how far apart the separate letters sit (1 is the drawing's own spacing)
 //   p       the joining gesture: 0 is four letters, 1 is the signature. The
 //           letters travel, the inks turn to one color, and the i is dotted last.
-// The homepage plays p from 0 to 1 when the page opens, and again at the end.
+// The homepage plays it backwards: it opens on her M (p = 1) and lets the
+// letters out to p = 0, each into its own ink. Pass { gesture: 'expand' } so
+// that direction gets the soft start and long landing too.
 //
 // The geometry is cut from Mila's drawing (assets/handwriting/p_*.png) and
 // was ported from the Claude Design file (mila.jsx, animations-v3.jsx).
@@ -38,6 +40,8 @@
   // rather than slide; zero at both ends.
   const ARC = { M: 0, A: 0, I: -26, L: -18 };
   const DISSOLVE = [0.34, 0.58];
+  // Opening out, those strokes appear early, while the letters are still close.
+  const DISSOLVE_OPEN = [0.56, 0.72];
   const UNIFY = [0.4, 0.86];
   const DOT = [0.18, 0.96];
   const DOT_ARC = -46;
@@ -57,6 +61,8 @@
   };
   const EASE = {
     glide: bezier(0.35, 0, 0.25, 1),  // an unhurried start, a long soft landing
+    // the same curve mirrored, for playing p from 1 down to 0
+    glideBack: bezier(0.75, 0, 0.65, 1),
     fade: bezier(0.4, 0, 0.6, 1),
   };
   const prog = (p, [a, b], ease = EASE.fade) => ease(cl((p - a) / (b - a)));
@@ -102,7 +108,9 @@
     return n;
   };
 
-  function create(root, { tone, crop = 'apart', float = 0 } = {}) {
+  function create(root, { tone, crop = 'apart', float = 0, gesture = 'gather' } = {}) {
+    const glide = gesture === 'expand' ? EASE.glideBack : EASE.glide;
+    const dissolveWindow = gesture === 'expand' ? DISSOLVE_OPEN : DISSOLVE;
     const inks = INKS[tone] || INKS.dark;
     const [CX, CY, CW, CH] = CROPS[crop] || CROPS.apart;
     root.style.aspectRatio = `${CW} / ${CH}`;
@@ -160,10 +168,10 @@
         lastUnify = unify;
       }
 
-      const dissolve = 1 - prog(p, DISSOLVE);
+      const dissolve = 1 - prog(p, dissolveWindow);
       const motion = {};
       for (const L in WINDOWS) {
-        const t = prog(p, WINDOWS[L], EASE.glide);
+        const t = prog(p, WINDOWS[L], glide);
         motion[L] = { t, lift: ARC[L] * Math.sin(Math.PI * t) };
       }
 
@@ -188,7 +196,7 @@
       }
 
       // The dot follows the i on a low arc, a little behind it, and settles last.
-      const e = prog(p, DOT, EASE.glide), [dx0, dy0] = apart('I', e, time);
+      const e = prog(p, DOT, glide), [dx0, dy0] = apart('I', e, time);
       const ds = sep(DOT_SRC), dd = mer(DOT_DST);
       const x = lerp(ds[0] + dx0, dd[0], e) - ds[0];
       const y = lerp(ds[1] + dy0, dd[1], e) + DOT_ARC * Math.sin(Math.PI * e) - ds[1];
