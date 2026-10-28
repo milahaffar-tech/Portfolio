@@ -4,8 +4,8 @@
 // lends the page that project's colors for a moment, and on touch screens a
 // card's cover lifts as it passes. Nothing names it; the color just changes.
 // On case pages, the drawing beside each section draws itself in. On the
-// homepage, Mila's handwritten M opens out into its four letters as soon as
-// the page opens.
+// homepage, Mila's handwritten M opens into its four letters and closes
+// again, twice, as soon as the page opens.
 (() => {
   const root = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -57,30 +57,54 @@
   // — the M —
   if (!window.Mila) return;
 
-  // Opens on her M, waits a beat once at least half of el is on screen, then
-  // lets the letters out, each into its own ink. Once apart they keep
-  // drifting a little on their own while they are on screen.
-  function expand(el, sign, { spread = 1, delay = 0, duration = 3000 } = {}) {
-    if (reduce) { sign.set(0, { spread }); return; }
-    let visible = false, running = false, start = 0, waitUntil = 0;
+  // Her M opens into its four letters and closes again, twice, then rests as
+  // the M. Starts once at least half of el is on screen. While apart, the
+  // letters drift a little on their own.
+  const OPEN_CLOSE = [
+    { hold: 700 },            // her M
+    { to: 0, ms: 1900 },      // opens into M, i, L, A
+    { hold: 900 },
+    { to: 1, ms: 1900 },      // closes back into the M
+    { hold: 600 },
+    { to: 0, ms: 1900 },      // and once more
+    { hold: 900 },
+    { to: 1, ms: 1900 },
+  ];
+  function openAndClose(el, sign, { spread = 1, steps = OPEN_CLOSE } = {}) {
+    sign.set(1, { spread });
+    if (reduce) return;
+    // When each step starts and what p it starts from.
+    let t = 0, p = 1;
+    const plan = steps.map((step) => {
+      const s = { ...step, at: t, from: p };
+      t += step.hold || step.ms;
+      if (step.to !== undefined) p = step.to;
+      return s;
+    });
+    const total = t;
+    let start = 0;
     const frame = (now) => {
-      if (!visible) { running = false; return; }
-      if (!start && now >= waitUntil) start = now;
-      const s = start ? clamp01((now - start) / duration) : 0;
-      sign.set(1 - s, { spread, time: now });
+      if (!start) start = now;
+      const elapsed = now - start;
+      let step = plan[0];
+      for (const s of plan) if (s.at <= elapsed) step = s;
+      if (elapsed >= total) { sign.set(1, { spread, gesture: 'gather' }); return; }
+      if (step.hold) {
+        sign.set(step.from, { spread, time: now, gesture: step.from === 0 ? 'expand' : 'gather' });
+      } else {
+        const k = clamp01((elapsed - step.at) / step.ms);
+        sign.set(step.from + (step.to - step.from) * k, { spread, time: now, gesture: step.to === 0 ? 'expand' : 'gather' });
+      }
       requestAnimationFrame(frame);
     };
-    new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
-      if (!visible || running) return;
-      if (!start) waitUntil = performance.now() + delay;
-      running = true;
+    const seen = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      seen.disconnect();
       requestAnimationFrame(frame);
-    }, { threshold: 0.5 }).observe(el);
-    sign.set(1, { spread });
+    }, { threshold: 0.5 });
+    seen.observe(el);
   }
 
-  // The opening: her M, a beat to see it whole, then the four letters.
   const heroEl = document.querySelector('[data-mila="hero"]');
-  if (heroEl) expand(heroEl, Mila.create(heroEl, { crop: 'wide', float: 16, gesture: 'expand' }), { spread: 1.6, delay: 600, duration: 2800 });
+  if (heroEl) openAndClose(heroEl, Mila.create(heroEl, { crop: 'wide', float: 16 }), { spread: 1.6 });
 })();
