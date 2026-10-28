@@ -5,9 +5,10 @@
 //   spread  how far apart the separate letters sit (1 is the drawing's own spacing)
 //   p       the joining gesture: 0 is four letters, 1 is the signature. The
 //           letters travel, the inks turn to one color, and the i is dotted last.
-// The homepage plays it backwards: it opens on her M (p = 1) and lets the
-// letters out to p = 0, each into its own ink. Pass { gesture: 'expand' } so
-// that direction gets the soft start and long landing too.
+// The homepage plays it both ways: from her M (p = 1) out to four letters
+// (p = 0) and back. Pass { gesture: 'expand' } while p falls and 'gather'
+// while it rises, so each direction gets the soft start and long landing. The
+// two agree at p = 0 and p = 1, so switching there is seamless.
 //
 // The geometry is cut from Mila's drawing (assets/handwriting/p_*.png) and
 // was ported from the Claude Design file (mila.jsx, animations-v3.jsx).
@@ -108,9 +109,10 @@
     return n;
   };
 
+  // The easing and the window for the extra strokes, by direction.
+  const STYLES = { gather: [EASE.glide, DISSOLVE], expand: [EASE.glideBack, DISSOLVE_OPEN] };
+
   function create(root, { tone, crop = 'apart', float = 0, gesture = 'gather' } = {}) {
-    const glide = gesture === 'expand' ? EASE.glideBack : EASE.glide;
-    const dissolveWindow = gesture === 'expand' ? DISSOLVE_OPEN : DISSOLVE;
     const inks = INKS[tone] || INKS.dark;
     const [CX, CY, CW, CH] = CROPS[crop] || CROPS.apart;
     root.style.aspectRatio = `${CW} / ${CH}`;
@@ -157,6 +159,7 @@
     };
 
     function set(p, opts = {}) {
+      const [glide, dissolveWindow] = STYLES[opts.gesture || gesture] || STYLES.gather;
       p = cl(p);
       spread = opts.spread ?? 1;
       const time = opts.time ?? 0;
