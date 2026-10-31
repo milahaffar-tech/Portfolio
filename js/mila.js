@@ -1,14 +1,13 @@
-// Mila's handwritten name. Her letters start apart, each in its own ink, and
-// gather into one word.
+// Mila's handwritten name. Her letters start apart and gather into one word.
+// On the dark ground every letter is white; on paper each keeps its own ink.
 //
 // An instance is driven by set(p, { spread, time }):
 //   spread  how far apart the separate letters sit (1 is the drawing's own spacing)
 //   p       the joining gesture: 0 is four letters, 1 is the signature. The
 //           letters travel, the inks turn to one color, and the i is dotted last.
-// The homepage plays it both ways: from her M (p = 1) out to four letters
-// (p = 0) and back. Pass { gesture: 'expand' } while p falls and 'gather'
-// while it rises, so each direction gets the soft start and long landing. The
-// two agree at p = 0 and p = 1, so switching there is seamless.
+// The homepage plays it once, from four letters (p = 0) to her M (p = 1).
+// Pass { gesture: 'gather' } while p rises and 'expand' if it ever falls,
+// so each direction gets the soft start and long landing.
 //
 // The geometry is cut from Mila's drawing (assets/handwriting/p_*.png) and
 // was ported from the Claude Design file (mila.jsx, animations-v3.jsx).
@@ -30,7 +29,7 @@
 
   // Each letter's own ink, then the one ink they share once joined.
   const INKS = {
-    dark: { M: '#8fa4d2', I: '#8db79c', L: '#d9907e', A: '#b59bd2', end: '#f0e8dd' },
+    dark: { M: '#ffffff', I: '#ffffff', L: '#ffffff', A: '#ffffff', end: '#ffffff' },
     light: { M: '#1f3a8a', I: '#14532d', L: '#991b1b', A: '#581c87', end: '#2a201c' },
   };
   // The gesture, as shares of p. The letters set off a beat apart and arrive
