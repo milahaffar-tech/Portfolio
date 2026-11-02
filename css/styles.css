@@ -519,6 +519,9 @@ strong { font-weight: 600; }
 .step h3 { font-size: clamp(24px, 2.4vw, 32px); font-style: italic; font-weight: 300; margin: 0 0 14px; }
 .case-list { margin: 14px 0 18px; display: flex; flex-direction: column; gap: 10px; }
 .case-list li { position: relative; padding-left: 22px; color: color-mix(in srgb, var(--ink) 86%, var(--ground)); }
+.case-list .case-list { margin: 8px 0 2px; gap: 6px; }
+/* Mila's star: the step she most wants you to see */
+.star { display: inline-block; margin-left: 0.3em; font-style: normal; font-size: 0.7em; vertical-align: 0.2em; color: var(--accent); }
 .case-list li::before {
   content: ""; position: absolute; left: 0; top: 0.72em; width: 7px; height: 7px;
   border-radius: 50%; background: var(--accent);
