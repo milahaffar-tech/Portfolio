@@ -33,7 +33,7 @@ Motion respects `prefers-reduced-motion`: no grain or drifting, covers fade inst
 
 ## Type
 
-Google Fonts. Newsreader is the voice for all text. Each project's title has its own face, loaded only for the letters it uses: Bodoni Moda (MOF), Marcellus (ReSET Studio), Fraunces (YOCA), DM Sans (IthaCard), Cormorant Garamond (Botanic Gardens), Shippori Mincho (Studio Kintsu).
+Google Fonts. Newsreader is the voice for all text. Each project's title has its own face, loaded only for the letters it uses: Bodoni Moda (Matter of Form), Marcellus (ReSET Studio), Fraunces (YOCA), DM Sans (IthaCard), Cormorant Garamond (Botanic Gardens), Shippori Mincho (Studio Kintsu).
 
 ## Preview locally
 
